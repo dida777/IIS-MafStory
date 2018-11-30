@@ -7,10 +7,6 @@ class Don {
 	private $gps_uzemie;
 	private $aliancia;
 
-	public static function getSefFamilie($familia) {
-		return Db::dotazJeden("SELECT O.meno, O.priezvisko FROM Don D JOIN Osoba O ON D.rodne_cislo = O.rodne_cislo WHERE D.nazov_familie = ? ", [$familia]);
-	}
-
 	function __construct ($rodne_cislo) {
 		$data = Db::dotazJeden("SELECT * FROM Don WHERE rodne_cislo = ?", [$rodne_cislo]);
 		if($data != NULL) {
@@ -19,6 +15,14 @@ class Don {
 			$this->gps_uzemie = $data["gps_uzemie"];
 			$this->aliancia = $data["aliancia"];
 		}
+	}
+
+	public static function getSefFamilie($familia) {
+		return Db::dotazJeden("SELECT O.meno, O.priezvisko FROM Don D JOIN Osoba O ON D.rodne_cislo = O.rodne_cislo WHERE D.nazov_familie = ? ", [$familia]);
+	}
+
+	public static function getZoznamVykonavatelov($familia) {
+		return Db::dotazVsechny("SELECT O.meno, O.priezvisko, O.rodne_cislo FROM Clen C JOIN Osoba O ON C.rodne_cislo = O.rodne_cislo WHERE C.familia = ? ", [$familia]);
 	}
 
 	public function getRodneCislo() {

@@ -10,15 +10,17 @@
 		<p>Vek<input type="number" name="vek" required></p>
 		<p>Heslo<input type="text" name="heslo" required></p>
 		<p>Hodnosť
-			<input list="hodnost" name="hodnost">
-			<datalist id="hodnost">
-				<option value="" selected=""></option>
-				<option value="zelenac"></option>				
-				<option value="uklizec"></option>
-				<option value="sofer"></option>
-				<option value="kapsar"></option>
-				<option value="vymahac"></option>
-				<option value="snajper"></option>
+			<input type="text" list="hodnost" name="hodnost">
+			<datalist id="hodnost" autocomplete="off">
+				<select>
+					<option value="" selected=""></option>
+					<option value="zelenac"></option>				
+					<option value="uklizec"></option>
+					<option value="sofer"></option>
+					<option value="kapsar"></option>
+					<option value="vymahac"></option>
+					<option value="snajper"></option>
+				</select>
 			</datalist>
 		</p>
 		<p>

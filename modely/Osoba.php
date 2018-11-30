@@ -9,6 +9,18 @@ class Osoba {
 	private $vek;
 	private $typ; // 1 - don, 0 - clen
 
+	function __construct ($rodne_cislo = NULL) {
+		$data = Db::dotazJeden("SELECT * FROM Osoba WHERE rodne_cislo = ?", [$rodne_cislo]);
+		if($data != NULL) {
+			$this->rodne_cislo = $data["rodne_cislo"];
+			$this->heslo = $data["heslo"];
+			$this->meno = $data["meno"];
+			$this->priezvisko = $data["priezvisko"];
+			$this->vek = $data["vek"];
+			$this->typ = $data["typ"];
+		}
+	}
+
 	public static function getOsoba($hladana_osoba){ // hladana osoba = rodne cislo, meno, priezvisko
 		$osoby;
 		if (is_numeric($hladana_osoba)) {
@@ -32,18 +44,6 @@ class Osoba {
 
 	public static function getZoznamOsob(){ // hladana osoba = rodne cislo, meno, priezvisko
 		return Db::dotazVsechny("SELECT rodne_cislo, meno, priezvisko, vek, typ FROM Osoba");
-	}
-
-	function __construct ($rodne_cislo = NULL) {
-		$data = Db::dotazJeden("SELECT * FROM Osoba WHERE rodne_cislo = ?", [$rodne_cislo]);
-		if($data != NULL) {
-			$this->rodne_cislo = $data["rodne_cislo"];
-			$this->heslo = $data["heslo"];
-			$this->meno = $data["meno"];
-			$this->priezvisko = $data["priezvisko"];
-			$this->vek = $data["vek"];
-			$this->typ = $data["typ"];
-		}
 	}
 
 	public function getRodneCislo() {

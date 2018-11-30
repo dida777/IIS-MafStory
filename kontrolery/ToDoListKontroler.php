@@ -39,19 +39,27 @@ class ToDoListKontroler extends Kontroler {
 
 	public function new_work() {
 		// iba pre prihlasenych
-		if (isset($_SESSION["rodne_cislo"])) {
+		if (isset($_SESSION["rodne_cislo"]) && $_SESSION["typ"] == 1) {
 			$this->pohled = 'new_work';
 			$this->data["success"] = "";
 			$this->hlavicka['titulek'] = 'Zadať novú úlohu';
 			$this->data["don"] = new Don($_SESSION["rodne_cislo"]);
+			$familia = $this->data["don"]->getNazovFamilie();
+			$this->data["zoz_vykon"] = Don::getZoznamVykonavatelov($familia);
+			$this->data["uzemia"] = Uzemie::getUzemia();
+
 			if (!empty($_POST)){
 				try {
-					$success = Uloha::insertUloha($_POST);
+					$success = Uloha::insertUloha($_POST, $_SESSION["rodne_cislo"]);
 					if ($success != 0)
 						$this->data["success"] = "Nová úloha bola úspešne zadaná!";
 				} catch (Exception $e) {
 					if (strpos($e->getMessage(), 'Duplicate') !== false){
 					 	$this->data["success"] = "Špecifické meno úlohy už existuje.";
+					} elseif (strpos($e->getMessage(), 'uzemie') !== false){
+					 	$this->data["success"] = "Zadané územie neexistuje.";
+					} elseif (strpos($e->getMessage(), 'clen') !== false){
+					 	$this->data["success"] = "Zadaný vykonávateľ neexistuje.";
 					} else
 						$this->data["success"] = "Chyba pri zadávaní, skúste znovu.";
 				}

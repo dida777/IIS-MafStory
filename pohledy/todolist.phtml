@@ -1,4 +1,9 @@
 <div id="todolist" action="todolist">
+	<?php if($_SESSION["typ"] == 1) : ?>
+		<form method="POST" action="todolist/new_work" id="new_work">
+			<input type="submit" value="Zadať novú úlohu">
+		</form>
+	<?php endif; ?>
 	<?php if(empty($ulohy)) : ?><tr><td>Žadne zadané úlohy</td><tr><?php endif; ?>
 	<?php foreach($ulohy as $uloha) : ?>
 		<p><?php if ($uloha["zadavatel_don"] != NULL) echo "Don:"; else echo "Aliancia:" ?></p>

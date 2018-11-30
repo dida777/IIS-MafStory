@@ -2,44 +2,38 @@
 	<?php if ($success != "") :?>
 		<p><?= $success ?></p>
 	<?php endif; ?>
-	<form method="POST" action="buddies/new_work" id="new_work">
+	<form method="POST" action="todolist/new_work" id="new_work">
 		<input type="hidden" name="nazov_familie" value="<?php echo $don->getNazovFamilie();?>" />
 		<p>Špecifické meno úlohy<input type="text" name="specificke_meno" required></p>
 		<p>Popis činnosti<input type="text" name="popis_cinnosti" required></p>
-		<p>Vykonávateľ
-			<select>
-				<option value="" selected=""></option>
-				<option value="zelenac">Zelenáč</option>				
-				<option value="uklizec">Zametač</option>
-				<option value="sofer">Šofér</option>
-				<option value="kapsar">Zlodej</option>
-				<option value="vymahac">Vymáhač</option>
-				<option value="snajper">Snajper</option>
-			</select>
-		</p>
 		<p>
-			Zadávateľ<input type="radio" name="zadavatel_don" value="<?php echo $don->getRodneCislo();?>" required>Don
+			Zadávateľ<input type="radio" name="zadavatel" value="<?= $don->getRodneCislo();?>" required>Don
 			<?php if ($don->getAliancia() != NULL) :?>
-				<input type="radio" name="zadavatel_aliancia" value="<?php echo $don->getAliancia();?>" required>Aliancia
+				<input type="radio" name="zadavatel" value="<?= $don->getAliancia();?>" required>Aliancia
 			<?php endif; ?>
+		</p>	
+		<p>Vykonávateľ
+			<input type="text" list="clenovia" name="vykonavatel">
+			<datalist id="clenovia" autocomplete="off">
+				<select>
+					<option value="" selected=""></option>
+					<?php foreach($zoz_vykon as $zoznam) : ?>
+						<option value="<?= $zoznam["rodne_cislo"]?>"><?= $zoznam["meno"] . " " . $zoznam["priezvisko"]?></option>
+					<?php endforeach; ?>
+				</select>				
+			</datalist>
 		</p>
-		<p>GPS súradnice miesta<input type="text" name="heslo" required></p>
-		<p>
-			Hodnosť<!-- <input type="text" name="hodnost" required> -->
-			<select>
-				<option value="" selected=""></option>
-				<option value="zelenac">Zelenáč</option>				
-				<option value="uklizec">Zametač</option>
-				<option value="sofer">Šofér</option>
-				<option value="kapsar">Zlodej</option>
-				<option value="vymahac">Vymáhač</option>
-				<option value="snajper">Snajper</option>
-			</select>
-		</p>
-		<p>
-			Pokrvná väzba<input type="radio" name="pokrvna_vazba" value="ano" required>áno
-			<input type="radio" name="pokrvna_vazba" value="ne" required>nie
-		</p>
+		
+		<p>GPS súradnice miesta
+			<input type="text" list="uzemie" name="gps_miesta">
+			<datalist id="uzemie" autocomplete="off">
+				<select>
+					<option value="" selected=""></option>
+					<?php foreach($uzemia as $miesto) : ?>
+						<option value="<?= $miesto["gps"]?>"><?= $miesto["hodnota"]?></option>
+					<?php endforeach; ?>
+				</select>				
+			</datalist></p>
 		<input type="submit" value="Pridať">
 	</form>
 </div>

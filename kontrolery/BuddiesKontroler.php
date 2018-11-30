@@ -31,7 +31,6 @@ class BuddiesKontroler extends Kontroler {
 			$this->pohled = 'new_buddy';
 			$this->data["success"] = "";
 			$this->hlavicka['titulek'] = 'Pridať člena';
-			$this->pohled = 'new_buddy';
 			$this->data["don"] = new Don($_SESSION["rodne_cislo"]);
 			if (!empty($_POST)){
 				try {

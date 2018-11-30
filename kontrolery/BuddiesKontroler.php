@@ -37,6 +37,8 @@ class BuddiesKontroler extends Kontroler {
 					$success = Osoba::insertOsoba($_POST);
 					if ($success != 0)
 						$this->data["success"] = "Nový člen bol úspešne vložený!";
+					else
+						$this->data["success"] = "Chyba pri vkladaní, skúste znovu.";
 				} catch (Exception $e) {
 					if (strpos($e->getMessage(), 'Duplicate') !== false){
 					 	$this->data["success"] = "Rodné číslo už existuje.";

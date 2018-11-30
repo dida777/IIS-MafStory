@@ -32,8 +32,10 @@ class Uloha {
 		Db::dotaz("UPDATE Uloha SET cas_zaciatku = ? WHERE specificke_meno = ?", [$cas_zaciatku, $specificke_meno]);
 	}
 
-	public static function updateCasKonca($specificke_meno, $cas_konca) {
+	public static function updateCasKonca($specificke_meno, $cas_konca, $uspesnost, $komentar) {
 		Db::dotaz("UPDATE Uloha SET cas_konca = ? WHERE specificke_meno = ?", [$cas_konca, $specificke_meno]);
+		Db::dotaz("UPDATE Uloha SET uspesnost = ? WHERE specificke_meno = ?", [$uspesnost, $specificke_meno]);
+		Db::dotaz("UPDATE Uloha SET komentar = ? WHERE specificke_meno = ?", [$komentar, $specificke_meno]);
 	}
 
 	public static function getDonUlohy($don, $aliancia) {

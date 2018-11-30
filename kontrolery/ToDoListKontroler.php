@@ -13,16 +13,12 @@ class ToDoListKontroler extends Kontroler {
 				$don = new Don($_SESSION["rodne_cislo"]);
 				$aliancia = new Aliancia($don->getAliancia());
 				$this->data["ulohy"] = Uloha::getDonUlohy($_SESSION["rodne_cislo"], $aliancia->getIdAliancie());
-				// var_dump($this->data["ulohy"]);
-
-				
-
 			} else {
 				$this->data["ulohy"] = Uloha::getClenUlohy($_SESSION["rodne_cislo"]);
 			}
 
 
-			if (isset($parametry[0]) ) {
+			if (isset($parametry[0])) {
 				switch ($parametry[0]) {
 					case "zacat":
 						$this->zacatUlohu();
@@ -42,7 +38,7 @@ class ToDoListKontroler extends Kontroler {
 	}
 
 	public function ukoncitUlohu() {		
-		Uloha::updateCasKonca($_POST["specificke_meno"], $_POST["cas_konca"]);
+		Uloha::updateCasKonca($_POST["specificke_meno"], $_POST["cas_konca"], $_POST["uspesnost"], $_POST["komentar"]);
 		$this->presmeruj("todolist");
 	}
 }

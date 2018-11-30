@@ -5,18 +5,17 @@ class Uzemie {
 	private $gps;
 	private $hodnota;
 
-	/*function __construct ($rodne_cislo) {
-		$data = Db::dotazJeden("SELECT * FROM Osoba WHERE rodne_cislo = ?", [$rodne_cislo]);
+	function __construct ($gps) {
+		$data = Db::dotazJeden("SELECT * FROM Uzemie WHERE gps = ?", [$gps]);
 		if($data != NULL) {
-			$this->rodne_cislo = $data["rodne_cislo"];
-			$this->heslo = $data["heslo"];
-			$this->meno = $data["meno"];
-			$this->priezvisko = $data["priezvisko"];
-			$this->vek = $data["vek"];
-		} else {
-			echo "dačo je napiču, vypis chybovu hlasku";
+			$this->gps = $data["gps"];
+			$this->hodnota = $data["hodnota"];
 		}
-	}*/
+	}
+
+	public static function getUzemia(){
+		return Db::dotazVsechny("SELECT * FROM Uzemie");
+	}
 
 	public function getGps() {
 		return $this->gps;
@@ -33,3 +32,4 @@ class Uzemie {
 	public function setHodnota( $hodnota) {
 		$this->hodnota = $hodnota;
 	}
+}

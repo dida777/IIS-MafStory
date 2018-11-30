@@ -7,18 +7,15 @@ class Zraz {
 	private $usporiadatel;
 	private $gps_miesta;
 
-	/*function __construct ($rodne_cislo) {
-		$data = Db::dotazJeden("SELECT * FROM Osoba WHERE rodne_cislo = ?", [$rodne_cislo]);
+	function __construct ($id_zrazu) {
+		$data = Db::dotazJeden("SELECT * FROM Zraz WHERE id_zrazu = ?", [$id_zrazu]);
 		if($data != NULL) {
-			$this->rodne_cislo = $data["rodne_cislo"];
-			$this->heslo = $data["heslo"];
-			$this->meno = $data["meno"];
-			$this->priezvisko = $data["priezvisko"];
-			$this->vek = $data["vek"];
-		} else {
-			echo "dačo je napiču, vypis chybovu hlasku";
+			$this->id_zrazu = $data["id_zrazu"];
+			$this->datum_cas = $data["datum_cas"];
+			$this->usporiadatel = $data["usporiadatel"];
+			$this->gps_miesta = $data["gps_miesta"];
 		}
-	}*/
+	}
 
 	public function getIdZrazu() {
 		return $this->id_zrazu;
@@ -51,3 +48,4 @@ class Zraz {
 	public function setGpsMiesta( $gps_miesta) {
 		$this->gps_miesta = $gps_miesta;
 	}
+}

@@ -16,16 +16,7 @@ h1 { /* main title */
 	text-shadow: 3px 3px 3px #737373;
 }
 
-/*footer {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 0.1rem;
-  font-size: 11px;
-  background-color: #efefef;
-  text-align: center;
-}*/
+
 
 article {
 	width: 100%;
@@ -102,27 +93,9 @@ textarea {
 	height: 90px;
 
 }
-#search p {
-	color: black;
-	float: left;
-}
-#search input[type="submit"] {
-	float: right;
-	background: green;
-	color: white;
-	padding: 5px 7px;
-	border-radius: 10px;
-	border: 0px;
-}
 
-#search input[type="text"] {	
-	float: left;
-	text-align: left;
-	width: 250px;
-	border-radius: 5px;
-	border: 1px solid #aaaaaa;
-	padding: 0.3em;
-}
+
+
 #chyba {
 	width: 100%;
 	text-align: center;
@@ -168,4 +141,99 @@ textarea {
 #right {
 	width: 48%;
 	float: right;
+}
+
+#osoby_result {
+	width: 80%;
+	margin: auto;
+	border: 1px solid #000000;
+	border-radius: 10px;
+	padding: 10px;
+	background-color: grey;
+	margin-top: 20px;
+}
+
+#osoby_result table, #osoby_result td {
+	border-bottom: 1px solid black;
+	border-collapse: collapse;
+	width: 65%;
+	height: 20px;
+	padding: 5px;
+
+}
+#osoby_result th {
+	height: 40px;
+	text-align: left;
+	
+	
+
+}
+
+#search input[type="submit"] {
+	float: right;
+	background: green;
+	color: white;
+	padding: 5px 7px;
+	border-radius: 10px;
+	border: 0px;
+}
+
+#search input[type="text"] {	
+	float: left;
+	text-align: left;
+	width: 250px;
+	border-radius: 5px;
+	border: 1px solid #aaaaaa;
+	padding: 0.3em;
+}
+
+#search_container {
+	width: 80%;
+	margin: auto;
+	margin-bottom: 40px;
+	height: 120px;
+	margin-top: 20px;
+}
+
+#search {
+	border: 1px solid #000000;
+	border-radius: 10px;
+	padding: 10px;
+	background-color: grey;
+	width: 70%;
+	margin-left: -10px;
+	height: 100px;
+	float: left;
+}
+
+#search p {
+	width: 100%;
+	margin: 0;
+	margin-bottom: 10px;
+}
+
+#search #chybova_hlaska {
+	width: 100%;
+	float: left;
+}
+
+#add {
+	border: 1px solid #000000;
+	border-radius: 10px;
+	background-color: grey;
+	float: right;
+	padding: 10px;
+	width: 20%;
+	margin-right: -10px;
+	height: 100px;
+}
+
+#new_buddy {
+	width: 80%;
+	margin: auto;
+	border: 1px solid #000000;
+	border-radius: 10px;
+	padding: 10px;
+	background-color: grey;
+	margin-top: 20px;
 }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="cs-cz">
+	<head>
+		<base href="/localhost" />
+		<meta charset="UTF-8" />
+		<title><?= $titulek ?></title>
+		<meta name="description" content="<?= $popis ?>" />
+		<meta name="keywords" content="<?= $klicova_slova ?>" />
+		<link rel="stylesheet" href="style.css" type="text/css"/>
+	</head>
+
+	<body>
+		<header>
+			<h1>Web dobrých MAFnews</h1>
+		</header>
+			
+		<nav>
+			<ul>
+				<li><a href="home">Home</a></li>
+				<li><a href="todolist">TO DO List</a></li>	
+				<li><a href="buddies">Buddies</a></li>
+				<li><a href="no_name">No Name</a></li>			
+			</ul>
+			<?php if (isset($_SESSION["rodne_cislo"])) : ?>
+				<ul id="logout">
+					<li><a href="home/logout">Logout</a></li>
+				</ul>
+			<?php endif; ?>
+		</nav>
+		<br clear="both" />
+		
+		<article>
+			<?php $this->kontroler->vypisPohled(); //vlozenie aktualneho pohladu do sablony ?>
+		</article>
+	</body>
+</html>

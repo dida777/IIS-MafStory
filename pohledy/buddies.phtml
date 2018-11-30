@@ -1,0 +1,38 @@
+<div id="buddies_stranka">
+	<?php if($_SESSION["typ"] == 1) : ?>
+		<form method="POST" action="buddies/new_buddy" id="add">
+			<input type="submit" value="Pridať člena"><br />
+		</form>
+	<?php endif; ?>
+	<form method="POST" action="buddies/search" id="search">
+		<p class="search">Vyhľadať osobu</p><br />
+		<br /><input type="text" name="hladana_osoba"><br />
+		<?php if (!empty($msg_hladanaOsoba)) : ?>
+			<p><?= $msg_hladanaOsoba ?></p>
+		<?php endif; ?>
+		<?php if (($hladanaOsoba) != NULL) : ?>
+			<?php foreach($hladanaOsoba as $persona) : ?>
+				<p><?= $persona["rodne_cislo"] . " " . $persona["meno"] . " " . $persona["priezvisko"] . " " .  $persona["vek"]?></p>
+				<?php if ($persona["typ"] == 0): ?>
+					<p><?= " => " . "Člen"?></p>
+				<?php else: ?>
+					<p><?= " => " . "Don"?></p>
+				<?php endif; ?>
+			<?php endforeach; ?>
+		<?php endif; ?>
+		<input type="submit" value="Hľadaj"><br />
+	</form>
+	<form method="POST" action="buddies" id="showAll">
+		<?php if (empty($hladanaOsoba)) : ?>
+			<br /><?php foreach($zoznamOsob as $persona) : ?>
+				<p><?= $persona["rodne_cislo"] . " " . $persona["meno"] . " " . $persona["priezvisko"] . " " .  $persona["vek"]?></p>
+				<?php if ($persona["typ"] == 0): ?>
+					<p><?= " => " . "Člen"?></p>
+				<?php else: ?>
+					<p><?= " => " . "Don"?></p>
+				<?php endif; ?>
+			<?php endforeach; ?>
+		<?php endif; ?>
+		<input type="submit" value="Celý zoznam"><br />
+	</form>
+</div>

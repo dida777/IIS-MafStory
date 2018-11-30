@@ -1,0 +1,12 @@
+<form method="POST" action="home" id="login">
+	<br />
+	<p class="login">Rod.číslo</p>
+	<input type="text" name="rodne_cislo"><br />
+	<p class="login">Heslo</p>
+	<input type="password" name="heslo"><br />
+	<?php if (!empty($msg)) : ?>
+		<p><?php echo $msg ?><br /></p>
+	<?php endif; ?>
+	<input type="submit" value="Login"><br />
+</form>
+

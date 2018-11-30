@@ -1,0 +1,30 @@
+<div id="new_buddy">
+	<?php if ($success != "") :?>
+		<p><?= $success ?></p>
+	<?php endif; ?>
+	<form method="POST" action="buddies/new_buddy" id="add">
+		<input type="hidden" name="nazov_familie" value="<?php echo $don->getNazovFamilie();?>" />
+		<p>Meno<input type="text" name="meno" required></p>
+		<p>Priezvisko<input type="text" name="priezvisko" required></p>
+		<p>Rodné číslo<input type="text" name="rodne_cislo" required></p>
+		<p>Vek<input type="number" name="vek" required></p>
+		<p>Heslo<input type="text" name="heslo" required></p>
+		<p>
+			Hodnosť<!-- <input type="text" name="hodnost" required> -->
+			<select>
+				<option value="" selected=""></option>
+				<option value="zelenac">Zelenáč</option>				
+				<option value="uklizec">Zametač</option>
+				<option value="sofer">Šofér</option>
+				<option value="kapsar">Zlodej</option>
+				<option value="vymahac">Vymáhač</option>
+				<option value="snajper">Snajper</option>
+			</select>
+		</p>
+		<p>
+			Pokrvná väzba<input type="radio" name="pokrvna_vazba" value="ano" required>áno
+			<input type="radio" name="pokrvna_vazba" value="ne" required>nie
+		</p>
+		<input type="submit" value="Pridať">
+	</form>
+</div>

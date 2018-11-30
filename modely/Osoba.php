@@ -20,9 +20,14 @@ class Osoba {
 	}
 
 	public static function insertOsoba($new_buddy){
+		try {
+			Clen::insertClen($new_buddy);
+		} catch (Exception $e) {
+			return 0;
+		}
+
 		$typ = 0;
-		Db::dotaz("INSERT INTO Osoba (rodne_cislo, heslo, meno, priezvisko, vek, typ) VALUES (?, ?, ?, ?, ?, ?)", [$new_buddy["rodne_cislo"], $new_buddy["heslo"], $new_buddy["meno"], $new_buddy["priezvisko"], $new_buddy["vek"], $typ]);
-		return Clen::insertClen($new_buddy);
+		return Db::dotaz("INSERT INTO Osoba (rodne_cislo, heslo, meno, priezvisko, vek, typ) VALUES (?, ?, ?, ?, ?, ?)", [$new_buddy["rodne_cislo"], $new_buddy["heslo"], $new_buddy["meno"], $new_buddy["priezvisko"], $new_buddy["vek"], $typ]); 
 	}
 
 	public static function getZoznamOsob(){ // hladana osoba = rodne cislo, meno, priezvisko

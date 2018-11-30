@@ -1,0 +1,171 @@
+body {
+	font-family: verdana;
+	font-size: 14px;
+	width: 900px; 
+	margin: 0 auto;
+	background-image: url("images/background.jpg");
+    background-attachment: fixed;
+
+
+}
+
+
+h1 { /* main title */
+	text-align: center;
+	color: green;
+	text-shadow: 3px 3px 3px #737373;
+}
+
+/*footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0.1rem;
+  font-size: 11px;
+  background-color: #efefef;
+  text-align: center;
+}*/
+
+article {
+	width: 100%;
+	margin: auto;
+	padding-top: 30px;
+	border-radius: 20px;
+	background: rgba(255, 255, 255, 0.7);
+	padding: 25px;
+}
+
+nav {
+	width: 100%;	
+}
+
+nav ul {
+	list-style-type: none;
+}
+
+nav li { /* top bottoms */
+	float: left;
+	margin-right: 15px;
+}
+
+nav a { /* top bottoms */
+	background: #595959;
+	color: white;
+	padding: 5px 10px;
+	border-radius: 10px;
+	text-decoration: none;
+	border: none;	
+}
+
+nav a:hover { /* top bottoms */
+	background: #2976f8;
+	color: red;
+	text-decoration: none;
+}
+
+input[type="submit"] {	/* login buttom */
+	float: right;
+	background: green;
+	color: white;
+	padding: 5px 10px;
+	border-radius: 10px;
+	border: 0px;
+}
+
+input[type="submit"]:hover { /* login buttom */
+	background: lime;
+	color: #EEEEEE;
+	cursor: pointer;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+	float: right;
+	width: 250px;
+	border-radius: 5px;
+	border: 1px solid #aaaaaa;
+	padding: 0.3em;
+}
+
+input[type="submit"] {
+	padding: 10px 25px;
+	display: block;
+	margin: 0 auto;
+	margin-top: 20px;
+	font-weight: bold;
+}
+
+textarea {
+	border-radius: 5px;
+	border: 1px solid #aaaaaa;
+	width: 483px;
+	height: 90px;
+
+}
+#search p {
+	color: black;
+	float: left;
+}
+#search input[type="submit"] {
+	float: right;
+	background: green;
+	color: white;
+	padding: 5px 7px;
+	border-radius: 10px;
+	border: 0px;
+}
+
+#search input[type="text"] {	
+	float: left;
+	text-align: left;
+	width: 250px;
+	border-radius: 5px;
+	border: 1px solid #aaaaaa;
+	padding: 0.3em;
+}
+#chyba {
+	width: 100%;
+	text-align: center;
+}
+
+#login {
+	color: red;
+	float: right;
+	text-align: right;
+}
+
+#logout {
+	float: right;
+}
+
+#familia table, #aliancia table , #vypis_ulohy table {
+	border: 1px solid #000000;
+	border-radius: 10px;
+	padding: 10px;
+	background-color: grey;
+	width: 100%;
+	margin-bottom: 30px;
+}
+
+.login {
+	color: white;
+}
+
+#login p {
+	padding: 0;
+	margin:0;
+	margin-top: 10px;
+}
+
+#login input {
+	margin-bottom: 25px;
+}
+
+#left {
+	width: 48%;
+}
+
+#right {
+	width: 48%;
+	float: right;
+}

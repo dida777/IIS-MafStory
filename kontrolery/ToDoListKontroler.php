@@ -52,7 +52,7 @@ class ToDoListKontroler extends Kontroler {
 	}
 
 	public function new_work() {
-		// iba pre prihlasenych
+		// iba pre prihlasenych donov
 		if (isset($_SESSION["rodne_cislo"]) && $_SESSION["typ"] == 1) {
 			$this->pohled = 'new_work';
 			$this->data["success"] = "";
@@ -64,7 +64,7 @@ class ToDoListKontroler extends Kontroler {
 
 			$timeout = 600; // Number of seconds until it times out.
 
-			// Check if the timeout field exists.
+			// Auto - logout
 			if(isset($_SESSION['timeout'])) {
 				// See if the number of seconds since the last
 				// visit is larger than the timeout period.

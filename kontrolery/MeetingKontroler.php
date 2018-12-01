@@ -1,11 +1,11 @@
 <?php 
 
-class NoNameKontroler extends Kontroler {
+class MeetingKontroler extends Kontroler {
 	public function zpracuj($parametry) {
 		// moze vidiet iba prihlaseny don
 		if (isset($_SESSION["rodne_cislo"]) && $_SESSION["typ"] == 1) {
-			$this->hlavicka['titulek'] = 'No Name';
-			$this->pohled = 'noname';	
+			$this->hlavicka['titulek'] = 'Meeting';
+			$this->pohled = 'meeting';	
 
 			$timeout = 600; // Number of seconds until it times out.
 
@@ -20,6 +20,9 @@ class NoNameKontroler extends Kontroler {
 					session_start();
 				}
 			}
+
+			$this->data["uzemia"] = Uzemie::getUzemia();
+			
 		}
 		else
 			$this->pohled = 'chyba';

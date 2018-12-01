@@ -15,6 +15,15 @@ class Aliancia {
 		}
 	}
 
+	public static function insertAliancie($post, $nazov_familie_dona){
+		$post["familie_v_aliancii"][] = $nazov_familie_dona;
+		Db::dotaz("INSERT INTO Aliancia (nazov_aliancie, datum_vzniku) VALUES (?, ?)", [$post["nazov_aliancie"], $post["datum_vzniku"]]); 
+		foreach ($post["familie_v_aliancii"] as $jedna_familia) {
+			Db::dotaz("UPDATE Don SET aliancia = LAST_INSERT_ID() WHERE nazov_familie = ?",[$jedna_familia]);
+		}
+		return 1;
+	}
+
 	public static function delAliance($cislo_aliancie){
 		var_dump($cislo_aliancie);
 		return Db::dotaz("DELETE FROM Aliancia WHERE id_aliancie = ?", [$cislo_aliancie]);

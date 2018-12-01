@@ -47,19 +47,37 @@ class HomeKontroler extends Kontroler {
 		// po prihlaseni uzivatela
 		if (isset($_SESSION["rodne_cislo"])) {
 			$this->pohled = 'menu';
-
+			$this->data["success"] = "";
 			// prihlaseny je DON
 			if ($_SESSION["typ"] == 1) {
 				$don = new Don($_SESSION["rodne_cislo"]);
-				$aliancia = new Aliancia($don->getAliancia());
-
+				$this->data["aliancia"] = new Aliancia($don->getAliancia());
+				// $this->data["zraz_donov"] = new Zraz();
+				// $this->data["usporiadatel"] = Osoba::getOsoba($this->data["zraz_donov"]->getUsporiadatel());
+				// var_dump($this->data["zraz_donov"]);
+				$idcko_aliancie = $this->data["aliancia"]->getIdAliancie();
 				$this->data["nazovFamilie"] = $don->getNazovFamilie();
-				$this->data["aliancia"] = $aliancia;
-				$this->data["ulohy"] = Uloha::getDonUlohy($_SESSION["rodne_cislo"], $aliancia->getIdAliancie());
+				$this->data["ulohy"] = Uloha::getDonUlohy($_SESSION["rodne_cislo"], $idcko_aliancie);
+
+				if (isset($parametry[0]) && ($parametry[0] == "add_aliancia"))
+					$this->add_aliancia($this->data["nazovFamilie"]);
 
 				// zmena hodnosti clenov
 				if(!empty($_POST) && isset($_POST["rodne_cislo"]) && isset($_POST["hodnost"])) {
 					Clen::zmenaHodnosti($_POST["rodne_cislo"], $_POST["hodnost"]);
+				}
+
+				// zrusit alianciu
+				if (isset($_POST) && isset($_POST["del_aliancia"])) {
+					try {
+						$delete = Don::deleteAliancia($_SESSION["rodne_cislo"], $idcko_aliancie);
+						if ($delete != 0) {
+							$this->pohled = 'zrusena_aliancia';
+						}
+					} catch (Exception $e) {
+						$this->data["success"] = "Alianciu sa napodarilo zrušiť!";
+					}
+					
 				}
 
 			} else { // prihlaseny je CLEN
@@ -70,6 +88,40 @@ class HomeKontroler extends Kontroler {
 
 			$this->data["sefFamilie"] = Don::getSefFamilie($this->data["nazovFamilie"]);			
 			$this->data["zoznamClenov"] = Clen::getZoznamClenov($this->data["nazovFamilie"]);		
+		}
+	}
+
+	public function add_aliancia($nazov_fmilie) {
+		// iba pre prihlasenych donov
+		if (isset($_SESSION["rodne_cislo"]) && $_SESSION["typ"] == 1) {
+			$this->pohled = 'add_aliancia';
+			$this->data["success"] = "";
+			$this->hlavicka['titulek'] = 'Zadať novú alianciu';
+			$this->data["nazovFamilie"] = $nazov_fmilie;
+			$this->data["cartels"] = Don::getAllFamilia($_SESSION["rodne_cislo"]);
+
+			if(!empty($_POST) && isset($_POST["nazov_aliancie"])) {
+				if (isset($_POST["familie_v_aliancii"])) {
+					if(Aliancia::insertAliancie($_POST, $nazov_fmilie) != 0)
+					$this->data["success"] = "Aliancia bola vytvorená.";
+				} else
+					$this->data["success"] = "Musíte vybrať aspoň jednu famíliu.";
+			}
+
+			// Auto - logout
+			$timeout = 600; // Number of seconds until it times out.
+			if(isset($_SESSION['timeout'])) {
+				// See if the number of seconds since the last
+				// visit is larger than the timeout period.
+				$duration = time() - (int)$_SESSION['timeout'];
+				if($duration > $timeout) {
+					// Destroy the session and restart it.
+					session_destroy();
+					session_start();
+				}
+			}
+
+
 		}
 	}
 }

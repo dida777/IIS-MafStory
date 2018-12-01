@@ -1,0 +1,12 @@
+<div id="add_aliancia">
+	<form method="POST" action="home" id="new_aliancia">
+		<p>Názov aliancie<input type="text" name="nazov_aliancie" required></p>
+		<p>Dátum vzniku<input type="datetime-local" name="datum_vzniku" required></p>
+		<p>Famílie v aliancii: <?= $nazovFamilie; ?>
+			<?php foreach($cartels as $cartel) : ?>
+				<input type="checkbox" name="familie_v_aliancii" value="<?= $cartel["nazov_familie"]?>" required><?= $cartel["nazov_familie"]?>
+			<?php endforeach; ?>
+		</p>
+		<input type="submit" value="Založiť alianciu">
+	</form>
+</div>

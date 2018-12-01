@@ -14,6 +14,7 @@ class HomeKontroler extends Kontroler {
 			if (($_POST["heslo"] == $osoba->getHeslo()) && ($_POST["heslo"] != NULL)){
 				$_SESSION["rodne_cislo"] = $osoba->getRodneCislo();
 				$_SESSION["typ"] = $osoba->getTyp();
+				$_SESSION['session_time'] = time(); //got the login time for user in second 
 			} else {
 				$this->data["msg"] = "Wrong password!";
 			}
@@ -25,6 +26,23 @@ class HomeKontroler extends Kontroler {
 			unset($_SESSION["rodne_cislo"]);
 			$this->presmeruj("home");
 		}
+
+		$timeout = 600; // Number of seconds until it times out.
+
+		// Check if the timeout field exists.
+		if(isset($_SESSION['timeout'])) {
+			// See if the number of seconds since the last
+			// visit is larger than the timeout period.
+			$duration = time() - (int)$_SESSION['timeout'];
+			if($duration > $timeout) {
+				// Destroy the session and restart it.
+				session_destroy();
+				session_start();
+			}
+		}
+ 
+		// Update the timout field with the current time.
+		$_SESSION['timeout'] = time();
 
 		// po prihlaseni uzivatela
 		if (isset($_SESSION["rodne_cislo"])) {

@@ -8,6 +8,20 @@ class BuddiesKontroler extends Kontroler {
 			$this->pohled = 'buddies';		
 			$this->data["msg_hladanaOsoba"] = "";
 			$this->data["hladanaOsoba"] = NULL;
+
+			$timeout = 600; // Number of seconds until it times out.
+
+			// Check if the timeout field exists.
+			if(isset($_SESSION['timeout'])) {
+				// See if the number of seconds since the last
+				// visit is larger than the timeout period.
+				$duration = time() - (int)$_SESSION['timeout'];
+				if($duration > $timeout) {
+					// Destroy the session and restart it.
+					session_destroy();
+					session_start();
+				}
+			}
 			
 			$this->data["zoznamOsob"] = Osoba::getZoznamOsob();
 
@@ -32,6 +46,21 @@ class BuddiesKontroler extends Kontroler {
 			$this->data["success"] = "";
 			$this->hlavicka['titulek'] = 'Pridať člena';
 			$this->data["don"] = new Don($_SESSION["rodne_cislo"]);
+
+			$timeout = 600; // Number of seconds until it times out.
+
+			// Check if the timeout field exists.
+			if(isset($_SESSION['timeout'])) {
+				// See if the number of seconds since the last
+				// visit is larger than the timeout period.
+				$duration = time() - (int)$_SESSION['timeout'];
+				if($duration > $timeout) {
+					// Destroy the session and restart it.
+					session_destroy();
+					session_start();
+				}
+			}
+			
 			if (!empty($_POST)){
 				try {
 					$success = Osoba::insertOsoba($_POST);

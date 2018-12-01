@@ -17,6 +17,25 @@ class Don {
 		}
 	}
 
+	public static function getAllFamilia($rod_cislo){
+		return Db::dotazVsechny("SELECT nazov_familie FROM Don WHERE aliancia IS NULL AND rodne_cislo != ?", [$rod_cislo]);
+	}
+
+	public static function deleteAliancia($r_cislo_dona, $id_aliancie){
+		$r_cisla_donov = Db::dotazVsechny("SELECT D.rodne_cislo FROM Don D WHERE D.aliancia = ? ", [$id_aliancie]);
+		
+		try {
+			foreach ($r_cisla_donov as $jeden_don) {
+				Db::dotaz("UPDATE Don SET aliancia = ? WHERE rodne_cislo = ?", [NULL, $jeden_don["rodne_cislo"]]);
+			}
+			var_dump($id_aliancie);
+			Aliancia::delAliance($id_aliancie);
+		} catch (Exception $e) {
+			return 0;
+		}	
+		return 1;
+	}
+
 	public static function getSefFamilie($familia) {
 		return Db::dotazJeden("SELECT O.meno, O.priezvisko FROM Don D JOIN Osoba O ON D.rodne_cislo = O.rodne_cislo WHERE D.nazov_familie = ? ", [$familia]);
 	}

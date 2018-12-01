@@ -15,6 +15,11 @@ class Aliancia {
 		}
 	}
 
+	public static function delAliance($cislo_aliancie){
+		var_dump($cislo_aliancie);
+		return Db::dotaz("DELETE FROM Aliancia WHERE id_aliancie = ?", [$cislo_aliancie]);
+	}
+
 	public function getIdAliancie() {
 		return $this->id_aliancie;
 	}

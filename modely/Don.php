@@ -17,6 +17,10 @@ class Don {
 		}
 	}
 
+	public static function getZadavatelZraz(){
+		return Db::dotazVsechny("SELECT D.rodne_cislo FROM Don JOIN Zraz ON rodne_cislo = usporiadatel");
+	}
+
 	public static function getAllFamilia($rod_cislo){
 		return Db::dotazVsechny("SELECT nazov_familie FROM Don WHERE aliancia IS NULL AND rodne_cislo != ?", [$rod_cislo]);
 	}

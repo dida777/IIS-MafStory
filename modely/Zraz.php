@@ -17,6 +17,10 @@ class Zraz {
 		}
 	}
 
+	public static function insertZraz($infos) {
+		return Db::dotaz("INSERT INTO Zraz (datum_cas, usporiadatel, gps_miesta) VALUES (?, ?, ?) ",[$infos["datum_cas"], $infos["usporiadatel"], $infos["gps_miesta"]]);
+	}
+
 	public function getIdZrazu() {
 		return $this->id_zrazu;
 	}

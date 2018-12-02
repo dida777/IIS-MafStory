@@ -1,9 +1,13 @@
 <div id="left">
 	<?php if ($success != "") :?>
-			<p><?= $success ?></p>
-		<?php endif; ?>
+		<p><?= $success ?></p>
+	<?php endif; ?>
+	<p>Meno: <?= $info_meno; ?></p>
+	<p>Priezvisko: <?= $info_priezvisko; ?></p>
+	<p>Vek: <?= $info_vek; ?></p>
 	<?php if($_SESSION["typ"] == 1) : ?>
 		<h1>DON</h1>
+		<p>Moje uzemie: <?= $info_uzemie; ?></p>
 		<div id="aliancia">
 			<table>
 				<tr><th colspan="2">Tvoja aliancia</th></tr>
@@ -41,6 +45,8 @@
 		</div> -->
 	<?php else : ?>
 		<h1>ČLEN</h1>
+		<p>Hodnosť: <?= $info_hodnost; ?></p>
+		<p>Pokrvná väzba s donom: <?= $info_pokr_vazba; ?></p>
 	<?php endif; ?>
 	<div id="vypis_ulohy">
 		<table>

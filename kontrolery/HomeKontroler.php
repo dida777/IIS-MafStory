@@ -11,6 +11,7 @@ class HomeKontroler extends Kontroler {
 		// spracovanie prihlasovacieho formulara
 		if(!empty($_POST) && isset($_POST["rodne_cislo"]) && isset($_POST["heslo"])) {
 			$osoba = new Osoba($_POST['rodne_cislo']);
+
 			if (($_POST["heslo"] == $osoba->getHeslo()) && ($_POST["heslo"] != NULL)){
 				$_SESSION["rodne_cislo"] = $osoba->getRodneCislo();
 				$_SESSION["typ"] = $osoba->getTyp();
@@ -19,7 +20,6 @@ class HomeKontroler extends Kontroler {
 				$this->data["msg"] = "Wrong password!";
 			}
 		}
-
 
 		// odhlasenie
 		if (isset($parametry[0]) && $parametry[0] == "logout") {
@@ -48,14 +48,22 @@ class HomeKontroler extends Kontroler {
 		if (isset($_SESSION["rodne_cislo"])) {
 			$this->pohled = 'menu';
 			$this->data["success"] = "";
+			$osoba = new Osoba($_SESSION['rodne_cislo']);
+			$this->data["info_meno"] = $osoba->getMeno();
+			$this->data["info_priezvisko"] = $osoba->getPriezvisko();
+			$this->data["info_vek"] = $osoba->getVek();
+
 			// prihlaseny je DON
 			if ($_SESSION["typ"] == 1) {
 				$don = new Don($_SESSION["rodne_cislo"]);
 				$this->data["aliancia"] = new Aliancia($don->getAliancia());
+				$zadavatelia_zrazov = Don::getZadavatelZraz();
+				var_dump($zadavatelia_zrazov);
 				// $this->data["zraz_donov"] = new Zraz();
 				// $this->data["usporiadatel"] = Osoba::getOsoba($this->data["zraz_donov"]->getUsporiadatel());
 				// var_dump($this->data["zraz_donov"]);
 				$idcko_aliancie = $this->data["aliancia"]->getIdAliancie();
+				$this->data["info_uzemie"] = $don->getGpsUzemie();
 				$this->data["nazovFamilie"] = $don->getNazovFamilie();
 				$this->data["ulohy"] = Uloha::getDonUlohy($_SESSION["rodne_cislo"], $idcko_aliancie);
 
@@ -82,6 +90,9 @@ class HomeKontroler extends Kontroler {
 
 			} else { // prihlaseny je CLEN
 				$clen = new Clen($_SESSION["rodne_cislo"]);
+				$this->data["info_hodnost"] = $clen->getHodnost();
+				$this->data["info_pokr_vazba"] = $clen->getPokrvnaVazba();
+
 				$this->data["nazovFamilie"] = $clen->getFamilia();
 				$this->data["ulohy"] = Uloha::getClenUlohy($_SESSION["rodne_cislo"]);
 			}

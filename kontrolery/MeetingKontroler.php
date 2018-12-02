@@ -6,6 +6,10 @@ class MeetingKontroler extends Kontroler {
 		if (isset($_SESSION["rodne_cislo"]) && $_SESSION["typ"] == 1) {
 			$this->hlavicka['titulek'] = 'Meeting';
 			$this->pohled = 'meeting';	
+			$this->data["r_cislo"] = $_SESSION["rodne_cislo"];
+			$this->data["uzemia"] = Uzemie::getUzemia();
+			$this->data["success"] = "";
+
 
 			$timeout = 600; // Number of seconds until it times out.
 
@@ -22,7 +26,17 @@ class MeetingKontroler extends Kontroler {
 			}
 
 			$this->data["uzemia"] = Uzemie::getUzemia();
-			
+
+			if (!empty($_POST)){
+				try {
+					$success = Zraz::insertZraz($_POST);
+					if ($success != 0)
+						$this->data["success"] = "Zraz bol zadaný.";
+				} catch (Exception $e) {
+					var_dump($e->getMessage());
+					$this->data["success"] = "Chyba pri zadávaní, skúste znovu.";
+				}
+			}
 		}
 		else
 			$this->pohled = 'chyba';

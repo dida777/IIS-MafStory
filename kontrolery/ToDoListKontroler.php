@@ -18,6 +18,7 @@ class ToDoListKontroler extends Kontroler {
 				if($duration > $timeout) {
 					// Destroy the session and restart it.
 					session_destroy();
+					$this->presmeruj("home");
 					session_start();
 				}
 			}
@@ -72,6 +73,7 @@ class ToDoListKontroler extends Kontroler {
 				if($duration > $timeout) {
 					// Destroy the session and restart it.
 					session_destroy();
+					$this->presmeruj("home");
 					session_start();
 				}
 			}

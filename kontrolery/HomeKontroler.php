@@ -56,12 +56,19 @@ class HomeKontroler extends Kontroler {
 			// prihlaseny je DON
 			if ($_SESSION["typ"] == 1) {
 				$don = new Don($_SESSION["rodne_cislo"]);
+
+				$idcka_zrazov = Don::getIdZraz();
+				$this->data["pocet_zrazov"] = count($idcka_zrazov);
+
+				foreach ($idcka_zrazov as $zvolalZraz) {
+					$this->data["zraz_donov"] = new Zraz($zvolalZraz);
+					$this->data["info_miesta"][] = $this->data["zraz_donov"]->getGpsMiesta();
+					$this->data["info_id"][] = $this->data["zraz_donov"]->getIdZrazu();
+					$this->data["info_datumcas"][] = $this->data["zraz_donov"]->getDatumCas();
+					$this->data["usporiadatel"][] = Osoba::getOsoba($this->data["zraz_donov"]->getUsporiadatel());
+				}
+
 				$this->data["aliancia"] = new Aliancia($don->getAliancia());
-				// $zadavatelia_zrazov = Don::getZadavatelZraz();
-				// var_dump($zadavatelia_zrazov);
-				// $this->data["zraz_donov"] = new Zraz();
-				// $this->data["usporiadatel"] = Osoba::getOsoba($this->data["zraz_donov"]->getUsporiadatel());
-				// var_dump($this->data["zraz_donov"]);
 				$idcko_aliancie = $this->data["aliancia"]->getIdAliancie();
 				$this->data["info_uzemie"] = $don->getGpsUzemie();
 				$this->data["nazovFamilie"] = $don->getNazovFamilie();

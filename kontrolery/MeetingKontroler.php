@@ -10,6 +10,9 @@ class MeetingKontroler extends Kontroler {
 			$this->data["uzemia"] = Uzemie::getUzemia();
 			$this->data["success"] = "";
 
+			$don = new Don($_SESSION["rodne_cislo"]);
+			$this->data["uz_zadany"] = $don->getZvolalZraz();
+
 
 			$timeout = 600; // Number of seconds until it times out.
 
@@ -27,16 +30,30 @@ class MeetingKontroler extends Kontroler {
 
 			$this->data["uzemia"] = Uzemie::getUzemia();
 
-			if (!empty($_POST)){
+			if (isset($_POST) && isset($_POST["new_zraz"])){
 				try {
 					$success = Zraz::insertZraz($_POST);
 					if ($success != 0)
 						$this->data["success"] = "Zraz bol zadaný.";
 				} catch (Exception $e) {
 					var_dump($e->getMessage());
-					$this->data["success"] = "Chyba pri zadávaní, skúste znovu.";
+					if (strpos($e->getMessage(), 'uzemie') !== false)
+					 	$this->data["success"] = "Zadané územie neexistuje.";
+					else
+						$this->data["success"] = "Chyba pri zadávaní, skúste znovu.";
 				}
 			}
+
+			if (isset($_POST) && isset($_POST["del_zraz"])) {
+					try {
+						$delete = Don::deleteZraz($_SESSION["rodne_cislo"], $this->data["uz_zadany"]);
+						if ($delete != 0)
+							$this->data["success"] = "Zraz bol zrušený.";
+					} catch (Exception $e) {
+						$this->data["success"] = "Zraz sa napodarilo zrušiť!";
+					}
+					
+				}
 		}
 		else
 			$this->pohled = 'chyba';

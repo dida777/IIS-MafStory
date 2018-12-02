@@ -1,26 +1,41 @@
 <div>
 	<h1>Usporiadať zraz Donov</h1>
-	<?php if ($success == "Zraz bol zadaný.") :?>
-		<p><?= $success ?></p>
-	<?php else : ?>
-		<?php if ($success != "") :?>
+	<?php if ($uz_zadany == NULL) : ?>
+		<?php if ($success == "Zraz bol zadaný.") :?>
 			<p><?= $success ?></p>
+		<?php else : ?>
+			<?php if ($success != "") :?>
+				<p><?= $success ?></p>
+			<?php endif; ?>
+			<form method="POST" action="meeting" id="new_zraz">
+					<input type="hidden" name="new_zraz" value="NULL">
+				<input type="hidden" name="usporiadatel" value="<?= $r_cislo; ?>" />
+				<p>Dátum a čas zrazu: <input type="datetime-local" name="datum_cas" required></p>		
+				<p>GPS súradnice miesta
+					<input type="text" list="uzemie" name="gps_miesta" required>
+					<datalist id="uzemie" autocomplete="off">
+						<select>
+							<option value="" selected=""></option>
+							<?php foreach($uzemia as $miesto) : ?>
+								<option value="<?= $miesto["gps"]?>"><?= $miesto["hodnota"]?></option>
+							<?php endforeach; ?>
+						</select>				
+					</datalist>
+				</p>
+				<input type="submit" value="Poslať oznámenie">
+			</form>
 		<?php endif; ?>
-		<form method="POST" action="meeting" id="new_zraz">
-			<input type="hidden" name="usporiadatel" value="<?= $r_cislo; ?>" />
-			<p>Dátum a čas zrazu: <input type="datetime-local" name="datum_cas" required></p>		
-			<p>GPS súradnice miesta
-				<input type="text" list="uzemie" name="gps_miesta" required>
-				<datalist id="uzemie" autocomplete="off">
-					<select>
-						<option value="" selected=""></option>
-						<?php foreach($uzemia as $miesto) : ?>
-							<option value="<?= $miesto["gps"]?>"><?= $miesto["hodnota"]?></option>
-						<?php endforeach; ?>
-					</select>				
-				</datalist>
-			</p>
-			<input type="submit" value="Poslať oznámenie">
-		</form>
-	<?php endif; ?>
+	<?php else : ?>
+			<?php if ($success == "Zraz bol zrušený.") :?>
+				<p><?= $success ?></p>
+			<?php else : ?>
+				<?php if ($success != "") :?>
+					<p><?= $success ?></p>
+				<?php endif; ?>
+				<form method="POST" action="meeting" id="del_zraz">
+					<input type="submit" value="Zrušiť oznámenie">
+					<input type="hidden" name="del_zraz" value="NULL">
+				</form>
+			<?php endif; ?>
+	<?php endif; ?>	
 </div>

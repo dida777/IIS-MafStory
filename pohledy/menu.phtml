@@ -29,20 +29,23 @@
 				<?php endif; ?>
 			</table>	
 		</div>
-<!-- 		<div id="zraz_donov">
+		<div id="zraz_donov">
 			<table>
 				<tr><th colspan="2">Zraz donov</th></tr>
 				<?php if ($zraz_donov != NULL) : ?>
-					<tr><td>Zraz číslo <?= $zraz_donov->getIdZrazu(); ?></td></tr>
-					<tr><td>Usporiadateľ:</td><td>meno dona</td>
-					<tr><td>Dátum a čas:</td><td><?= $zraz_donov->getDatumCas(); ?></td>
-					<tr><td>Miesto zrazu:</td><td><?= $zraz_donov->getGpsMiesta(); ?></td>
-					</tr>
+					<?php for ($i=0; $i < $pocet_zrazov; $i++) : ?>
+						<tr><td>Zraz číslo <?= $info_id[$i]; ?></td></tr>
+						<?php foreach($usporiadatel[$i] as $pohostitel) : ?>
+							<tr><td>Usporiadateľ:</td><td><?= $pohostitel["meno"] . " " . $pohostitel["priezvisko"]; ?></td></tr>
+						<?php endforeach; ?>
+						<tr><td>Dátum a čas:</td><td><?= $info_datumcas[$i]; ?></td></tr>
+						<tr><td>Miesto zrazu:</td><td><?= $info_miesta[$i]; ?></td></tr>
+					<?php endfor; ?>
 				<?php else : ?>
 					<tr><td>Žiadny zraz nie je naplanovaný.</td></tr>
 				<?php endif; ?>
 			</table>	
-		</div> -->
+		</div> 
 	<?php else : ?>
 		<h1>ČLEN</h1>
 		<p>Hodnosť: <?= $info_hodnost; ?></p>

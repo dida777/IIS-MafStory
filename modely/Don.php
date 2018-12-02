@@ -6,6 +6,7 @@ class Don {
 	private $nazov_familie;
 	private $gps_uzemie;
 	private $aliancia;
+	private $zvolal_zraz;
 
 	function __construct ($rodne_cislo) {
 		$data = Db::dotazJeden("SELECT * FROM Don WHERE rodne_cislo = ?", [$rodne_cislo]);
@@ -14,15 +15,27 @@ class Don {
 			$this->nazov_familie = $data["nazov_familie"];
 			$this->gps_uzemie = $data["gps_uzemie"];
 			$this->aliancia = $data["aliancia"];
+			$this->zvolal_zraz = $data["zvolal_zraz"];
 		}
 	}
 
-	public static function getZadavatelZraz(){
-		return Db::dotazVsechny("SELECT D.rodne_cislo FROM Don JOIN Zraz ON rodne_cislo = usporiadatel");
+	public static function getIdZraz(){
+		return Db::dotazVsechny("SELECT zvolal_zraz FROM Don WHERE zvolal_zraz IS NOT NULL");
 	}
 
 	public static function getAllFamilia($rod_cislo){
 		return Db::dotazVsechny("SELECT nazov_familie FROM Don WHERE aliancia IS NULL AND rodne_cislo != ?", [$rod_cislo]);
+	}
+
+	public static function deleteZraz($r_cislo_dona, $id_zrazu){
+		try {
+			Db::dotaz("UPDATE Don SET zvolal_zraz = ? WHERE rodne_cislo = ?", [NULL, $r_cislo_dona]);
+			Zraz::delZrazu($id_zrazu);
+		} catch (Exception $e) {
+			var_dump($e->getMessage());
+			return 0;
+		}	
+		return 1;
 	}
 
 	public static function deleteAliancia($r_cislo_dona, $id_aliancie){
@@ -32,7 +45,6 @@ class Don {
 			foreach ($r_cisla_donov as $jeden_don) {
 				Db::dotaz("UPDATE Don SET aliancia = ? WHERE rodne_cislo = ?", [NULL, $jeden_don["rodne_cislo"]]);
 			}
-			var_dump($id_aliancie);
 			Aliancia::delAliance($id_aliancie);
 		} catch (Exception $e) {
 			return 0;
@@ -78,6 +90,14 @@ class Don {
 
 	public function setAliancia( $aliancia) {
 		$this->aliancia = $aliancia;
+	}
+
+	public function getZvolalZraz() {
+		return $this->zvolal_zraz;
+	}
+
+	public function setZvolalZraz( $zvolal_zraz) {
+		$this->zvolal_zraz = $zvolal_zraz;
 	}
 
 }

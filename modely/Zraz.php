@@ -7,8 +7,8 @@ class Zraz {
 	private $usporiadatel;
 	private $gps_miesta;
 
-	function __construct () {
-		$data = Db::dotazVsechny("SELECT * FROM Zraz WHERE id_zrazu = id_zrazu");
+	function __construct ($id_zrazu) {
+		$data = Db::dotazJeden("SELECT * FROM Zraz_donov WHERE id_zrazu = ?", [$id_zrazu["zvolal_zraz"]]);
 		if($data != NULL) {
 			$this->id_zrazu = $data["id_zrazu"];
 			$this->datum_cas = $data["datum_cas"];
@@ -17,8 +17,13 @@ class Zraz {
 		}
 	}
 
+	public static function delZrazu($id_zraz) {
+		return Db::dotaz("DELETE FROM Zraz_donov WHERE id_zrazu = ?", [$id_zraz]);
+	}
+
 	public static function insertZraz($infos) {
-		return Db::dotaz("INSERT INTO Zraz (datum_cas, usporiadatel, gps_miesta) VALUES (?, ?, ?) ",[$infos["datum_cas"], $infos["usporiadatel"], $infos["gps_miesta"]]);
+		Db::dotaz("INSERT INTO Zraz_donov (datum_cas, usporiadatel, gps_miesta) VALUES (?, ?, ?) ",[$infos["datum_cas"], $infos["usporiadatel"], $infos["gps_miesta"]]);
+		return Db::dotaz("UPDATE Don SET zvolal_zraz = LAST_INSERT_ID() WHERE rodne_cislo = ?", [$infos["usporiadatel"]]);
 	}
 
 	public function getIdZrazu() {

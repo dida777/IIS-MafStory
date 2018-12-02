@@ -57,8 +57,8 @@ class HomeKontroler extends Kontroler {
 			if ($_SESSION["typ"] == 1) {
 				$don = new Don($_SESSION["rodne_cislo"]);
 				$this->data["aliancia"] = new Aliancia($don->getAliancia());
-				$zadavatelia_zrazov = Don::getZadavatelZraz();
-				var_dump($zadavatelia_zrazov);
+				// $zadavatelia_zrazov = Don::getZadavatelZraz();
+				// var_dump($zadavatelia_zrazov);
 				// $this->data["zraz_donov"] = new Zraz();
 				// $this->data["usporiadatel"] = Osoba::getOsoba($this->data["zraz_donov"]->getUsporiadatel());
 				// var_dump($this->data["zraz_donov"]);

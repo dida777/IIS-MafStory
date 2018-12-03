@@ -49,7 +49,7 @@ nav a { /* top bottoms */
 
 nav a:hover { /* top bottoms */
 	background: #2976f8;
-	color: red;
+	color: white;
 	text-decoration: none;
 }
 
@@ -223,7 +223,7 @@ textarea {
 	height: 100px;
 }*/
 
-/*#new_buddy { tmava seda tabulka
+#new_buddy { 
 	width: 80%;
 	margin: auto;
 	border: 1px solid #000000;
@@ -232,7 +232,28 @@ textarea {
 	background-color: grey;
 	margin-top: 20px;
 	height: 100%;
+}
+#new_buddy table {
+	margin: auto;
+}
+#new_don { 
+	width: 80%;
+	margin: auto;
+	border: 1px solid #000000;
+	border-radius: 10px;
+	padding: 10px;
+	background-color: grey;
+	margin-top: 20px;
+	height: 100%;
+}
+#new_don table {
+	margin: auto;
+}
+/*.vek {
+	margin-left: 1px;
 }*/
+
+
 #udaje {
 	border: 1px solid #000000;
 	border-radius: 10px;
@@ -281,6 +302,14 @@ textarea {
 	height: 25px;
 	border-bottom: 1px solid #595959;
 	border-collapse: collapse;
+	width: 65%;
+	padding: 5px;
+}
+#uloha table {
+	width: 100%;
+}
+#zraz td, #zraz table {
+	height: 25px;
 	width: 65%;
 	padding: 5px;
 }

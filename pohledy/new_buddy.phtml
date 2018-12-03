@@ -3,7 +3,7 @@
 		<p><?= $success ?></p>
 	<?php endif; ?>
 	<form method="POST" action="buddies/new_buddy" id="add">
-		<div id="udaje_new_buddy">
+		<div>
 			<table>
 				<?php if($_SESSION["typ"] == 1) : // don?>
 					<input type="hidden" name="nazov_familie" value="<?php echo $don->getNazovFamilie();?>" />
@@ -46,8 +46,8 @@
 					Pokrvná väzba<input type="radio" name="pokrvna_vazba" value="ano" required>áno
 					<input type="radio" name="pokrvna_vazba" value="ne" required>nie
 				</td></tr>
+				<tr><td><input type="submit" value="Pridať"></td></tr>
 			</table>
-		</div>
-		<input type="submit" value="Pridať">
+		</div>		
 	</form>
 </div>

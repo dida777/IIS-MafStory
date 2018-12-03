@@ -10,21 +10,25 @@
 			<form method="POST" action="meeting" id="new_zraz">
 					<input type="hidden" name="new_zraz" value="NULL">
 				<input type="hidden" name="usporiadatel" value="<?= $r_cislo; ?>" />
-				<p>Dátum a čas zrazu: <input type="datetime-local" name="datum_cas" required></p>		
-				<p>GPS súradnice miesta
-					<input type="text" list="uzemie" name="gps_miesta" required>
-					<datalist id="uzemie" autocomplete="off">
-						<select>
-							<option value="" selected=""></option>
-							<?php foreach($uzemia as $miesto) : ?>
-								<?php if ($miesto["gps"] != "admin") :?>
-									<option value="<?= $miesto["gps"]?>"><?= $miesto["hodnota"]?></option>
-								<?php endif; ?>
-							<?php endforeach; ?>
-						</select>				
-					</datalist>
-				</p>
-				<input type="submit" value="Poslať oznámenie">
+					<div id="zraz">
+						<table>
+							<tr><td>Dátum a čas zrazu: <td><input type="datetime-local" name="datum_cas" required></td></td></tr>		
+							<tr><td>GPS súradnice miesta
+								<td><input type="text" list="uzemie" name="gps_miesta" required>
+								<datalist id="uzemie" autocomplete="off">
+									<select>
+										<option value="" selected=""></option>
+										<?php foreach($uzemia as $miesto) : ?>
+											<?php if ($miesto["gps"] != "admin") :?>
+												<option value="<?= $miesto["gps"]?>"><?= $miesto["hodnota"]?></option>
+											<?php endif; ?>
+										<?php endforeach; ?>
+									</select>				
+								</datalist>
+							</td></td></tr>
+							<tr><td><td></td><input type="submit" value="Poslať oznámenie"></td></tr>
+						</table>	
+					</div>	
 			</form>
 		<?php endif; ?>
 	<?php else : ?>

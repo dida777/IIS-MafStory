@@ -313,6 +313,28 @@ textarea {
 	width: 65%;
 	padding: 5px;
 }
+
+/*#edit_clen table, #edit_clent td {
+	border-bottom: 1px solid black;
+	border-collapse: collapse;
+	width: 65%;
+	height: 20px;
+	padding: 5px;
+
+}
+#edit_clen th {
+	height: 40px;
+	text-align: left;
+}*/
+
+
+/*#edit_clen table, #edit_clen th, #edit_clen td {
+    border: 1px solid black;
+}
+*/
+
+
+
 /*#uloha tr, #uloha td {
 	border-bottom: 1px solid black;
 }*/

@@ -3,11 +3,14 @@
 		<p><?= $success ?></p>
 	<?php else: ?>
 		<table>
-			<tr>
-				<td><?= $person[0]["rodne_cislo"] . " " . $person[0]["meno"] . " " . $person[0]["priezvisko"] . " " . $person[0]["vek"]?></td>
+			
+				<tr><td>Rodne cislo: <?= $person[0]["rodne_cislo"]?></tr></td> 
+				<tr><td>Meno: <?= $person[0]["meno"] ?></td></tr>
+				<tr><td>Priezvisko:<?= $person[0]["priezvisko"]?></td></tr>
+				<tr><td> Vek:<?= $person[0]["vek"]?></td></tr>
 				<?php if($person[0]["typ"] == 0) : //upravujem Clena ?>
 					<form method="POST">
-						<td>
+						<td> Hodnost:
 							<input type="hidden" name="rodne_cislo" value="<?= $person[0]["rodne_cislo"] ?>">
 							<select name="hodnost">
 								<option value="<?= $hodnost ?>" selected><?= $hodnost ?></option>
@@ -19,7 +22,7 @@
 								<option value="snajper">Snajper</option>
 							</select>	
 						</td>			
-						<td>
+						<tr><td> Pokrvna vazba
 							<input type="hidden" name="rodne_cislo" value="<?= $person[0]["rodne_cislo"] ?>">
 							<?php if ($pokrvna_vazba == "ano") :?>
 								<input type="radio" name="pokrvna_vazba" value="ano" checked required>áno
@@ -28,7 +31,7 @@
 								<input type="radio" name="pokrvna_vazba" value="ano" required>áno
 								<input type="radio" name="pokrvna_vazba" value="ne" checked required>nie
 							<?php endif; ?>
-						</td>
+						</td></tr>
 						<input type="submit" value="Uložiť zmeny">
 					</form>
 				<?php else: //upravujem Dona?>

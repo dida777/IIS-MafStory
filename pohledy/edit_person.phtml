@@ -35,8 +35,9 @@
 						<input type="submit" value="Uložiť zmeny">
 					</form>
 				<?php else: //upravujem Dona?>
-					<td><?= $nazov_familie." ".$aliancia?></td>
-					<td><?=$zvolal_zraz?></td>
+					<tr><td>Nazov familie:<?= $nazov_familie ?></td></tr>
+					<tr><td>Aliance: <?= $aliancia?></td></tr>
+					<tr><td><?=$zvolal_zraz?></td></tr>
 					<form method="POST">
 						<td>
 							<input type="hidden" name="rodne_cislo" value="<?= $person[0]["rodne_cislo"] ?>">

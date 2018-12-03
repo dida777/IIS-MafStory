@@ -23,9 +23,6 @@
 					<?php if ($_SESSION["typ"] != 0) : //ak je prihlaseny DON alebo ADMIN?>
 						<li><a href="meeting">Meeting</a></li>			
 					<?php endif; ?>
-					<?php if ($_SESSION["typ"] == 2) : //ak je prihlaseny ADMIN ?> 
-						<li><a href="admin_aliancia">Edit Aliancia</a></li>
-					<?php endif; ?>
 				<?php endif; ?>
 			</ul>
 			<?php if (isset($_SESSION["rodne_cislo"])) : ?>

@@ -8,7 +8,7 @@
 				<p id="chybova_hlaska"><?= $msg_hladanaOsoba ?></p> 
 			<?php endif; ?>
 		</form>
-		<?php if($_SESSION["typ"] == 1) : ?>
+		<?php if($_SESSION["typ"] != 0) : //DON alebo ADMIN?>
 			<form method="POST" action="buddies/new_buddy" id="add">
 				<input type="submit" value="Pridať člena">
 			</form>
@@ -35,14 +35,16 @@
 			<?php if (empty($hladanaOsoba)) : ?>
 				<?php foreach($zoznamOsob as $persona) : ?>
 					<tr>
-						<td><?= $persona["rodne_cislo"] ?></td>
-						<td><?= $persona["meno"] ?></td>
-						<td><?= $persona["priezvisko"] ?></td>
-						<td><?= $persona["vek"]?></td>
-						<?php if ($persona["typ"] == 0): ?>
-							<td>Člen</td>
-						<?php else: ?>
-							<td>Don</td>
+						<?php if (($persona["meno"]) != "admin") : ?>
+							<td><?= $persona["rodne_cislo"] ?></td>
+							<td><?= $persona["meno"] ?></td>
+							<td><?= $persona["priezvisko"] ?></td>
+							<td><?= $persona["vek"]?></td>
+							<?php if ($persona["typ"] == 0): ?>
+								<td>Člen</td>
+							<?php else: ?>
+								<td>Don</td>
+							<?php endif; ?>
 						<?php endif; ?>
 					</tr>
 				<?php endforeach; ?>

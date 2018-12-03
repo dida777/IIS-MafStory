@@ -23,23 +23,19 @@ class Osoba {
 
 	public static function getOsoba($hladana_osoba){ // hladana osoba = rodne cislo, meno, priezvisko
 		$osoby;
-		if (is_numeric($hladana_osoba)) {
-			$osoby = Db::dotazVsechny("SELECT rodne_cislo, meno, priezvisko, vek, typ FROM Osoba WHERE rodne_cislo = ?", [$hladana_osoba]);
-		} else {
-			$osoby = Db::dotazVsechny("SELECT rodne_cislo, meno, priezvisko, vek, typ FROM Osoba WHERE (meno = ? || priezvisko = ?)", [$hladana_osoba, $hladana_osoba]);
-		}
+		if ($hladana_osoba != "admin") {
+			if (is_numeric($hladana_osoba)) {
+				$osoby = Db::dotazVsechny("SELECT rodne_cislo, meno, priezvisko, vek, typ FROM Osoba WHERE rodne_cislo = ?", [$hladana_osoba]);
+			} else {
+				$osoby = Db::dotazVsechny("SELECT rodne_cislo, meno, priezvisko, vek, typ FROM Osoba WHERE (meno = ? || priezvisko = ?)", [$hladana_osoba, $hladana_osoba]);
+			}
+		} else
+			$osoby = NULL;
 		return $osoby;
 	}
 
 	public static function insertOsoba($new_buddy){
-		try {
-			Clen::insertClen($new_buddy);
-		} catch (Exception $e) {
-			return 0;
-		}
-
-		$typ = 0;
-		return Db::dotaz("INSERT INTO Osoba (rodne_cislo, heslo, meno, priezvisko, vek, typ) VALUES (?, ?, ?, ?, ?, ?)", [$new_buddy["rodne_cislo"], $new_buddy["heslo"], $new_buddy["meno"], $new_buddy["priezvisko"], $new_buddy["vek"], $typ]); 
+		return Db::dotaz("INSERT INTO Osoba (rodne_cislo, heslo, meno, priezvisko, vek, typ) VALUES (?, ?, ?, ?, ?, ?)", [$new_buddy["rodne_cislo"], $new_buddy["heslo"], $new_buddy["meno"], $new_buddy["priezvisko"], $new_buddy["vek"], $new_buddy["typ"]]); 
 	}
 
 	public static function getZoznamOsob(){ // hladana osoba = rodne cislo, meno, priezvisko

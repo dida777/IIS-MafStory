@@ -25,6 +25,17 @@ class Db {
 			);
 		}
 	}
+
+ //    public static function pripoj($host, $uzivatel, $heslo, $databaze) {
+	// 	try {
+	//     	if (!isset(self::$spojeni)) 
+	// 			self::$spojeni = @new PDO("mysql:host=localhost;dbname=xbarno00;", 'xbarno00', 'omde6zej', self::$nastaveni);
+	//     } catch (PDOException $e) {
+	// 		echo "Connection error: ".$e->getMessage();
+	// 		die();
+	//     }
+	// }
+
 	
 	// Spustí dotaz a vrátí z něj první řádek
     public static function dotazJeden($dotaz, $parametry = array()) {

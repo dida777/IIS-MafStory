@@ -18,7 +18,7 @@ function autoloadFunkce($trida)
 spl_autoload_register("autoloadFunkce");
 
 // Připojení k databázi
-Db::pripoj("127.0.0.1", "root", "", "mafia");
+Db::pripoj("127.0.0.1", "root", "", "xbarno00");
 
 // Vytvoření routeru a zpracování parametrů od uživatele z URL
 $smerovac = new SmerovacKontroler();

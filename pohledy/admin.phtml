@@ -1,0 +1,42 @@
+<div id="don_stranka">
+	<div id="search_container">
+		<form method="POST" action="admin/search" id="search">
+			<p class="search">Vyhľadať Dona</p>
+			<input type="text" name="hladany_don">
+			<input type="submit" value="Hľadaj">
+			<?php if (!empty($msg_hladanyDon)) : ?>
+				<p id="chybova_hlaska"><?= $msg_hladanyDon ?></p> 
+			<?php endif; ?>
+		</form>
+		<form method="POST" action="admin/new_don" id="add">
+			<input type="submit" value="Pridať Dona">
+		</form>
+	</div>
+	<div id="don_result">		
+		<table>
+			<tr><th>Rodne cislo</th><th>Názov Famílie</th></tr>
+			<?php if (($hladanyDon) != NULL) : ?>
+				<tr>
+					<td><?= $hladanyDon["rodne_cislo"] ?></td>
+					<td><?= $hladanyDon["nazov_familie"] ?></td>
+				</tr>
+				<form action="/admin" method="POST">
+					<input type="submit" value="Upraviť Dona">
+				</form>
+			<?php endif; ?>
+			<?php if (empty($hladanyDon)) : ?>
+				<?php foreach($zoznamDonov as $don) : ?>
+					<tr>
+						<?php if (($don["nazov_familie"]) != "admin") : ?>
+							<td><?= $don["rodne_cislo"] ?></td>
+							<td><?= $don["nazov_familie"] ?></td>
+						<?php endif; ?>
+					</tr>
+				<?php endforeach; ?>
+			<?php endif; ?>
+			<form action="/admin" method="POST">
+				<input type="submit" value="Celý zoznam">
+			</form>
+		</table>
+	</div>	
+</div>

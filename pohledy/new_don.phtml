@@ -1,0 +1,27 @@
+<div id="new_don">
+	<?php if ($success != "") :?>
+		<p><?= $success ?></p>
+	<?php endif; ?>
+	<form method="POST" action="admin/new_don" id="add">
+		<input type="hidden" name="typ" value="1" required></p>
+		<p>Názov famílie<input type="text" name="nazov_familie" required></p>
+		<p>GPS územia<input type="text" list="place" name="gps_uzemie" required>
+			<datalist id="place" autocomplete="off">
+				<select>
+					<option value="" selected=""></option>
+					<?php foreach($uzemia as $miesto) : ?>
+						<?php if ($miesto["gps"] != "admin") :?>
+							<option value="<?= $miesto["gps"]?>"><?= $miesto["hodnota"]?></option>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				</select>				
+			</datalist>
+		</p>
+		<p>Meno<input type="text" name="meno" required></p>
+		<p>Priezvisko<input type="text" name="priezvisko" required></p>
+		<p>Rodné číslo<input type="text" name="rodne_cislo" required></p>
+		<p>Vek<input type="number" name="vek" required></p>
+		<p>Heslo<input type="text" name="heslo" required></p>
+		<input type="submit" value="Pridať">
+	</form>
+</div>

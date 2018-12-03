@@ -19,6 +19,45 @@ class Don {
 		}
 	}
 
+	public static function insertDon($new_don) {
+		foreach (Db::dotazVsechny("SELECT nazov_familie FROM Don") as $every) {
+			$family_names[] = $every["nazov_familie"];
+		}
+
+		$notuniq_family_name = in_array($new_don["nazov_familie"], $family_names); // kontroluje unikatnost nazvu rodiny
+
+		if (!$notuniq_family_name) {
+			try {
+				Osoba::insertOsoba($new_don);
+			} catch (Exception $e) {
+				if (strpos($e->getMessage(), 'Duplicate') != false){
+					return "Rodné číslo už existuje.";
+					
+				}
+			}
+			
+			return Db::dotaz("INSERT INTO Don (rodne_cislo, nazov_familie, gps_uzemie, , aliancia, zvolal_zraz) VALUES (?, ?, ?, ?, ?)", [$new_don["rodne_cislo"], $new_don["nazov_familie"], $new_don["gps_uzemie"], NULL, NULL]);
+		} else
+			return "Názov famílie už existuje.";
+	}
+
+	public static function getDon($hladany_don){ // hladany don = rodne cislo, nazov familie
+		$donovia;
+		if ($hladany_don != "admin") {
+			if (is_numeric($hladany_don)) {
+				$donovia = Db::dotazJeden("SELECT rodne_cislo, nazov_familie FROM Don WHERE rodne_cislo = ?", [$hladany_don]);
+			} else {
+				$donovia = Db::dotazJeden("SELECT rodne_cislo, nazov_familie FROM Don WHERE nazov_familie = ?", [$hladany_don]);
+			}
+		} else
+			$donovia = NULL;
+		return $donovia;
+	}
+
+	public static function getZoznamDonov(){ // zoznam vsetkych donov
+		return Db::dotazVsechny("SELECT rodne_cislo, nazov_familie FROM Don");
+	}
+
 	public static function getIdZraz(){
 		return Db::dotazVsechny("SELECT zvolal_zraz FROM Don WHERE zvolal_zraz IS NOT NULL");
 	}
@@ -32,7 +71,6 @@ class Don {
 			Db::dotaz("UPDATE Don SET zvolal_zraz = ? WHERE rodne_cislo = ?", [NULL, $r_cislo_dona]);
 			Zraz::delZrazu($id_zrazu);
 		} catch (Exception $e) {
-			var_dump($e->getMessage());
 			return 0;
 		}	
 		return 1;

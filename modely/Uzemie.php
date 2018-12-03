@@ -13,6 +13,10 @@ class Uzemie {
 		}
 	}
 
+	public static function getUzemiaBezDona(){
+		return Db::dotazVsechny("SELECT U.gps, U.hodnota FROM Uzemie U LEFT JOIN Don D ON (U.gps = D.gps_uzemie) WHERE D.gps_uzemie IS NULL");
+	}
+
 	public static function getUzemia(){
 		return Db::dotazVsechny("SELECT * FROM Uzemie");
 	}

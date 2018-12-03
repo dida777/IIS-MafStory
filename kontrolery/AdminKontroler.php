@@ -1,13 +1,14 @@
 <?php 
 
-class BuddiesKontroler extends Kontroler {
+class AdminKontroler extends Kontroler {
 	public function zpracuj($parametry) {
-		// moze vidiet iba prihlaseny clovek
-		if (isset($_SESSION["rodne_cislo"])) {
-			$this->hlavicka['titulek'] = 'Buddies';
-			$this->pohled = 'buddies';		
-			$this->data["msg_hladanaOsoba"] = "";
-			$this->data["hladanaOsoba"] = NULL;
+		//len ADMIN
+		if (isset($_SESSION["rodne_cislo"]) && $_SESSION["typ"] == 2) {
+			$this->hlavicka['titulek'] = 'Edit don';
+			$this->pohled = 'admin';	
+
+			$this->data["msg_hladanyDon"] = "";
+			$this->data["hladanyDon"] = NULL;
 
 			$timeout = 600; // Number of seconds until it times out.
 
@@ -24,29 +25,27 @@ class BuddiesKontroler extends Kontroler {
 				}
 			}
 			
-			$this->data["zoznamOsob"] = Osoba::getZoznamOsob();
+			$this->data["zoznamDonov"] = Don::getZoznamDonov();
 
-			if (!empty($_POST) && isset($_POST["hladana_osoba"])) {
-				if (($this->data["hladanaOsoba"] = Osoba::getOsoba($_POST["hladana_osoba"])) == NULL)
-					$this->data["msg_hladanaOsoba"] = "Osoba nenájdená.";
+			if (!empty($_POST) && isset($_POST["hladany_don"])) {
+				if (($this->data["hladanyDon"] = Don::getDon($_POST["hladany_don"])) == NULL)
+					$this->data["msg_hladanyDon"] = "Don nenájdený.";
 			}
 			
-			// prihlaseny je DON alebo ADMIN
-			if ($_SESSION["typ"] != 0) {
-				if (isset($parametry[0]) && ($parametry[0] == "new_buddy"))
-					$this->new_buddy();
-			}
+			if (isset($parametry[0]) && ($parametry[0] == "new_don"))
+				$this->new_don();
 		} else
 			$this->pohled = 'chyba';	
 	}
 
-	public function new_buddy() {
-		// moze vidiet iba prihlaseny DON alebo ADMIN
-		if (isset($_SESSION["rodne_cislo"]) && $_SESSION["typ"] != 0) {
-			$this->pohled = 'new_buddy';
+	public function new_don() {
+		// moze vidiet iba prihlaseny ADMIN
+		if (isset($_SESSION["rodne_cislo"]) && $_SESSION["typ"] == 2) {
+			$this->pohled = 'new_don';
 			$this->data["success"] = "";
-			$this->hlavicka['titulek'] = 'Pridať člena';
-			$this->data["don"] = new Don($_SESSION["rodne_cislo"]);
+			$this->hlavicka['titulek'] = 'Pridať Dona';
+
+			$this->data["uzemia"] = Uzemie::getUzemiaBezDona();
 
 			$timeout = 600; // Number of seconds until it times out.
 
@@ -65,10 +64,10 @@ class BuddiesKontroler extends Kontroler {
 			
 			if (!empty($_POST)){
 				try {
-					$success = Clen::insertClen($_POST);
+					$success = Don::insertDon($_POST);
 					if ($success != 0)
-						$this->data["success"] = "Nový člen bol úspešne vložený!";
-					elseif ($success == "Rodné číslo už existuje.") 
+						$this->data["success"] = "Nový don bol úspešne vložený!";
+					elseif (($success == "Rodné číslo už existuje.") || ($success == "Názov famílie už existuje."))
 						$this->data["success"] = $success;
 					else
 						$this->data["success"] = "Chyba pri vkladaní, skúste znovu.";

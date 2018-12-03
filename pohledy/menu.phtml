@@ -5,7 +5,7 @@
 	<p>Meno: <?= $info_meno; ?></p>
 	<p>Priezvisko: <?= $info_priezvisko; ?></p>
 	<p>Vek: <?= $info_vek; ?></p>
-	<?php if($_SESSION["typ"] == 1) : ?>
+	<?php if($_SESSION["typ"] != 0) : //DON alebo ADMIN?>
 		<h1>DON</h1>
 		<p>Moje uzemie: <?= $info_uzemie; ?></p>
 		<div id="aliancia">
@@ -33,7 +33,7 @@
 			<table>
 				<tr><th colspan="2">Zraz donov</th></tr>
 				<?php if ($zraz_donov != NULL) : ?>
-					<?php for ($i=0; $i < $pocet_zrazov; $i++) : ?>
+					<?php for ($i=1; $i < $pocet_zrazov; $i++) : ?>
 						<tr><td>Zraz číslo <?= $info_id[$i]; ?></td></tr>
 						<?php foreach($usporiadatel[$i] as $pohostitel) : ?>
 							<tr><td>Usporiadateľ:</td><td><?= $pohostitel["meno"] . " " . $pohostitel["priezvisko"]; ?></td></tr>
@@ -65,7 +65,7 @@
 			<tr><th colspan="2">Tvoja família</th></tr>
 			<tr><td>Názov famílie: </td><td><?= $nazovFamilie ?></td></tr>
 			<tr><td>Don: </td><td><?= $sefFamilie["meno"] . " " . $sefFamilie["priezvisko"] ?></td></tr>
-			<?php if($_SESSION["typ"] == 1) : ?>
+			<?php if($_SESSION["typ"] != 0) : //DON alebo ADMIN?>
 				<tr><td colspan="2">Členovia: </td></tr>
 					<?php foreach($zoznamClenov as $clen) : ?> 
 						<tr>

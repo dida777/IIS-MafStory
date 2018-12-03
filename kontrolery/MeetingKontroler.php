@@ -2,8 +2,8 @@
 
 class MeetingKontroler extends Kontroler {
 	public function zpracuj($parametry) {
-		// moze vidiet iba prihlaseny don
-		if (isset($_SESSION["rodne_cislo"]) && $_SESSION["typ"] == 1) {
+		// moze vidiet iba prihlaseny DON alebo ADMIN
+		if (isset($_SESSION["rodne_cislo"]) && $_SESSION["typ"] != 0) {
 			$this->hlavicka['titulek'] = 'Meeting';
 			$this->pohled = 'meeting';	
 			$this->data["r_cislo"] = $_SESSION["rodne_cislo"];
@@ -29,15 +29,13 @@ class MeetingKontroler extends Kontroler {
 				}
 			}
 
-			$this->data["uzemia"] = Uzemie::getUzemia();
-
 			if (isset($_POST) && isset($_POST["new_zraz"])){
 				try {
 					$success = Zraz::insertZraz($_POST);
 					if ($success != 0)
 						$this->data["success"] = "Zraz bol zadaný.";
 				} catch (Exception $e) {
-					var_dump($e->getMessage());
+					// var_dump($e->getMessage());
 					if (strpos($e->getMessage(), 'uzemie') !== false)
 					 	$this->data["success"] = "Zadané územie neexistuje.";
 					else

@@ -23,8 +23,8 @@ class ToDoListKontroler extends Kontroler {
 				}
 			}
 
-			// prihlaseny je DON
-			if ($_SESSION["typ"] == 1) {
+			// prihlaseny je DON alebo ADMIN
+			if ($_SESSION["typ"] != 0) {
 				$don = new Don($_SESSION["rodne_cislo"]);
 				$aliancia = new Aliancia($don->getAliancia());
 				$this->data["ulohy"] = Uloha::getDonUlohy($_SESSION["rodne_cislo"], $aliancia->getIdAliancie());
@@ -32,8 +32,8 @@ class ToDoListKontroler extends Kontroler {
 				$this->data["ulohy"] = Uloha::getClenUlohy($_SESSION["rodne_cislo"]);
 			}
 
-			// prihlaseny je DON
-			if ($_SESSION["typ"] == 1) {
+			// prihlaseny je DON alebo ADMIN
+			if ($_SESSION["typ"] != 0) {
 				if (isset($parametry[0]) && ($parametry[0] == "new_work"))
 					$this->new_work();
 			}
@@ -53,8 +53,8 @@ class ToDoListKontroler extends Kontroler {
 	}
 
 	public function new_work() {
-		// iba pre prihlasenych donov
-		if (isset($_SESSION["rodne_cislo"]) && $_SESSION["typ"] == 1) {
+		// iba pre prihlasenych DON alebo ADMIN
+		if (isset($_SESSION["rodne_cislo"]) && $_SESSION["typ"] != 0) {
 			$this->pohled = 'new_work';
 			$this->data["success"] = "";
 			$this->hlavicka['titulek'] = 'Zadať novú úlohu';
@@ -83,6 +83,8 @@ class ToDoListKontroler extends Kontroler {
 					$success = Uloha::insertUloha($_POST, $_SESSION["rodne_cislo"]);
 					if ($success != 0)
 						$this->data["success"] = "Nová úloha bola úspešne zadaná!";
+					else						
+					 	$this->data["success"] = "Zadané územie neexistuje.";
 				} catch (Exception $e) {
 					if (strpos($e->getMessage(), 'Duplicate') !== false){
 					 	$this->data["success"] = "Špecifické meno úlohy už existuje.";

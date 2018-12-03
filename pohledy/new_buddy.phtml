@@ -4,6 +4,7 @@
 	<?php endif; ?>
 	<form method="POST" action="buddies/new_buddy" id="add">
 		<input type="hidden" name="nazov_familie" value="<?php echo $don->getNazovFamilie();?>" />
+		<input type="hidden" name="typ" value="0" />
 		<p>Meno<input type="text" name="meno" required></p>
 		<p>Priezvisko<input type="text" name="priezvisko" required></p>
 		<p>Rodné číslo<input type="text" name="rodne_cislo" required></p>

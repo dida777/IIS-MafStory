@@ -17,7 +17,9 @@
 						<select>
 							<option value="" selected=""></option>
 							<?php foreach($uzemia as $miesto) : ?>
-								<option value="<?= $miesto["gps"]?>"><?= $miesto["hodnota"]?></option>
+								<?php if ($miesto["gps"] != "admin") :?>
+									<option value="<?= $miesto["gps"]?>"><?= $miesto["hodnota"]?></option>
+								<?php endif; ?>
 							<?php endforeach; ?>
 						</select>				
 					</datalist>

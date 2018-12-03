@@ -1,5 +1,5 @@
 <div id="todolist" action="todolist">
-	<?php if($_SESSION["typ"] == 1) : ?>
+	<?php if($_SESSION["typ"] != 0) : //DON alebo ADMIN?>
 		<form method="POST" action="todolist/new_work" id="new_work">
 			<input type="submit" value="Zadať novú úlohu">
 		</form>

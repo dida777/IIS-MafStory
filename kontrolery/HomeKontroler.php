@@ -42,7 +42,7 @@ class HomeKontroler extends Kontroler {
 		}
  
 		// Update the timout field with the current time.
-		$_SESSION['timeout'] = time();
+		// $_SESSION['timeout'] = time();
 
 		// po prihlaseni uzivatela
 		if (isset($_SESSION["rodne_cislo"])) {
@@ -53,8 +53,8 @@ class HomeKontroler extends Kontroler {
 			$this->data["info_priezvisko"] = $osoba->getPriezvisko();
 			$this->data["info_vek"] = $osoba->getVek();
 
-			// prihlaseny je DON
-			if ($_SESSION["typ"] == 1) {
+			// prihlaseny je DON alebo ADMIN
+			if ($_SESSION["typ"] != 0) {
 				$don = new Don($_SESSION["rodne_cislo"]);
 
 				$idcka_zrazov = Don::getIdZraz();
@@ -110,8 +110,8 @@ class HomeKontroler extends Kontroler {
 	}
 
 	public function add_aliancia($nazov_fmilie) {
-		// iba pre prihlasenych donov
-		if (isset($_SESSION["rodne_cislo"]) && $_SESSION["typ"] == 1) {
+		// iba pre prihlasenych DON alebo ADMIN
+		if (isset($_SESSION["rodne_cislo"]) && $_SESSION["typ"] != 0) {
 			$this->pohled = 'add_aliancia';
 			$this->data["success"] = "";
 			$this->hlavicka['titulek'] = 'Zadať novú alianciu';

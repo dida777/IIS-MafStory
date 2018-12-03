@@ -29,11 +29,14 @@ class Uloha {
 	}
 
 	public static function insertUloha($new_work, $r_cislo_dona) {
-		if ($new_work["zadavatel"] == $r_cislo_dona) {
-			return Db::dotaz("INSERT INTO Uloha (specificke_meno, popis_cinnosti, vykonavatel, zadavatel_don, zadavatel_aliancia, gps_miesta, cas_zaciatku, cas_konca, uspesnost, komentar) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [$new_work["specificke_meno"], $new_work["popis_cinnosti"], $new_work["vykonavatel"], $new_work["zadavatel"], NULL, $new_work["gps_miesta"], NULL, NULL, "", ""]);
-		} else {
-			return Db::dotaz("INSERT INTO Uloha (specificke_meno, popis_cinnosti, vykonavatel, zadavatel_don, zadavatel_aliancia, gps_miesta, cas_zaciatku, cas_konca, uspesnost, komentar) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [$new_work["specificke_meno"], $new_work["popis_cinnosti"], $new_work["vykonavatel"], NULL, $new_work["zadavatel"], $new_work["gps_miesta"], NULL, NULL, "", ""]);
-		}
+		if ($new_work["gps_miesta"] != "admin") {
+			if ($new_work["zadavatel"] == $r_cislo_dona) {
+				return Db::dotaz("INSERT INTO Uloha (specificke_meno, popis_cinnosti, vykonavatel, zadavatel_don, zadavatel_aliancia, gps_miesta, cas_zaciatku, cas_konca, uspesnost, komentar) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [$new_work["specificke_meno"], $new_work["popis_cinnosti"], $new_work["vykonavatel"], $new_work["zadavatel"], NULL, $new_work["gps_miesta"], NULL, NULL, "", ""]);
+			} else {
+				return Db::dotaz("INSERT INTO Uloha (specificke_meno, popis_cinnosti, vykonavatel, zadavatel_don, zadavatel_aliancia, gps_miesta, cas_zaciatku, cas_konca, uspesnost, komentar) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [$new_work["specificke_meno"], $new_work["popis_cinnosti"], $new_work["vykonavatel"], NULL, $new_work["zadavatel"], $new_work["gps_miesta"], NULL, NULL, "", ""]);
+			}
+		} else 
+			return;
 		
 	}
 

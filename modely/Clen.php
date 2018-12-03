@@ -22,6 +22,15 @@ class Clen {
 	}
 
 	public static function insertClen($new_buddy) {
+		$success = "";
+		try {
+			Osoba::insertOsoba($new_buddy);
+		} catch (Exception $e) {
+			if (strpos($e->getMessage(), 'Duplicate') != false){
+				$success = "Rodné číslo už existuje.";
+				return $success;
+			}
+		}
 		return Db::dotaz("INSERT INTO Clen (rodne_cislo, familia, hodnost, pokrvna_vazba) VALUES (?, ?, ?, ?)", [$new_buddy["rodne_cislo"], $new_buddy["nazov_familie"], $new_buddy["hodnost"], $new_buddy["pokrvna_vazba"]]);
 	}
 

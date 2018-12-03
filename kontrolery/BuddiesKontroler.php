@@ -123,6 +123,10 @@ class BuddiesKontroler extends Kontroler {
 				}
 			}
 			
+			if ($_SESSION["typ"] == 2) { //admin
+				$this->data["zoznamDon"] = Don::getZoznamDonov();
+			}
+
 			if (!empty($_POST)){
 				try {
 					$success = Clen::insertClen($_POST);

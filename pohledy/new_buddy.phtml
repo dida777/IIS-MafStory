@@ -5,7 +5,23 @@
 	<form method="POST" action="buddies/new_buddy" id="add">
 		<div id="udaje_new_buddy">
 			<table>
-				<input type="hidden" name="nazov_familie" value="<?php echo $don->getNazovFamilie();?>" />
+				<?php if($_SESSION["typ"] == 1) : // don?>
+					<input type="hidden" name="nazov_familie" value="<?php echo $don->getNazovFamilie();?>" />
+				<?php else: ?>
+					<tr><td>Názov famílie
+						<input type="text" list="nazov_familie" name="nazov_familie" required>
+						<datalist id="nazov_familie" autocomplete="off">
+							<select>
+								<option value="" selected=""></option>
+								<?php foreach($zoznamDon as $zoznam) : ?>
+									<?php if (($zoznam["nazov_familie"]) != "admin") : ?>
+										<option value="<?= $zoznam["nazov_familie"]?>"><?= $zoznam["nazov_familie"]?></option>
+									<?php endif; ?>
+								<?php endforeach; ?>
+							</select>
+						</datalist>
+					</td></tr>
+				<?php endif; ?>
 				<input type="hidden" name="typ" value="0" />
 				<tr><td>Meno<input type="text" name="meno" required></td></tr>
 				<tr><td>Priezvisko<input type="text" name="priezvisko" required></td></tr>
@@ -13,7 +29,7 @@
 				<tr><td>Vek<input type="number" name="vek" required></td></tr>
 				<tr><td>Heslo<input type="text" name="heslo" required></td></tr>
 				<tr><td>Hodnosť
-					<input type="text" list="hodnost" name="hodnost">
+					<input type="text" list="hodnost" name="hodnost" required>
 					<datalist id="hodnost" autocomplete="off">
 						<select>
 							<option value="" selected=""></option>

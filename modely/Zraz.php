@@ -8,7 +8,7 @@ class Zraz {
 	private $gps_miesta;
 
 	function __construct ($id_zrazu) {
-		$data = Db::dotazJeden("SELECT * FROM Zraz_donov WHERE id_zrazu = ?", [$id_zrazu["zvolal_zraz"]]);
+		$data = Db::dotazJeden("SELECT * FROM Zraz_donov WHERE id_zrazu = ?", [$id_zrazu]);
 		if($data != NULL) {
 			$this->id_zrazu = $data["id_zrazu"];
 			$this->datum_cas = $data["datum_cas"];

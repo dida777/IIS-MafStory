@@ -223,7 +223,7 @@ textarea {
 	height: 100px;
 }*/
 
-#new_buddy {
+/*#new_buddy { tmava seda tabulka
 	width: 80%;
 	margin: auto;
 	border: 1px solid #000000;
@@ -232,7 +232,7 @@ textarea {
 	background-color: grey;
 	margin-top: 20px;
 	height: 100%;
-}
+}*/
 #udaje {
 	border: 1px solid #000000;
 	border-radius: 10px;
@@ -303,3 +303,10 @@ textarea {
 	width: 65%;
 	padding: 5px;*/
 }
+/*#new_don_table td, #new_don_table table {
+	height: 25px;
+	border-bottom: 1px solid #595959;
+	border-collapse: collapse;
+	width: 65%;
+	padding: 5px;
+}*/

@@ -37,6 +37,9 @@ class Clen {
 	public static function zmenaHodnosti($rodne_cislo, $hodnost) {
 		return Db::dotaz("UPDATE Clen SET hodnost = ? WHERE rodne_cislo = ?", [$hodnost, $rodne_cislo]);
 	}
+	public static function zmenaPokrvnaVazba($rodne_cislo, $pokrvna_vazba) {
+		return Db::dotaz("UPDATE Clen SET pokrvna_vazba = ? WHERE rodne_cislo = ?", [$pokrvna_vazba, $rodne_cislo]);
+	}
 
 	public function getRodneCislo() {
 		return $this->rodne_cislo;

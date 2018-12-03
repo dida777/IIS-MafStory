@@ -52,10 +52,24 @@ class BuddiesKontroler extends Kontroler {
 			$this->pohled = 'edit_person';
 			$this->hlavicka['titulek'] = 'Upraviť osobu';
 			$this->data["success"] = "";
-			var_dump($_POST);
-			if (!empty($_POST)){
-				foreach ($_POST as $key) {
-					echo $key;
+			$this->data["person"] = "";
+			$this->data["pokrvna_vazba"] = "";
+			$this->data["hodnost"] = "";
+
+			if (!empty($_POST) && isset($_POST["rodne_cislo"])){ //rodne cislo odoby v post
+				$this->data["person"] = Osoba::getOsoba($_POST["rodne_cislo"]);
+				if ($this->data["person"][0]["typ"] == 1) {
+					echo "son don";
+				} else {
+					$clen = new Clen($this->data["person"][0]["rodne_cislo"]);
+					$this->data["pokrvna_vazba"] = $clen->getPokrvnaVazba();
+					$this->data["hodnost"] = $clen->getHodnost();
+					
+					if(!empty($_POST) && isset($_POST["rodne_cislo"]) && isset($_POST["hodnost"]))
+						Clen::zmenaHodnosti($_POST["rodne_cislo"], $_POST["hodnost"]);
+					
+					if(!empty($_POST) && isset($_POST["rodne_cislo"]) && isset($_POST["pokrvna_vazba"]))
+						Clen::zmenaPokrvnaVazba($_POST["rodne_cislo"], $_POST["pokrvna_vazba"]);
 				}
 			}
 

@@ -1,3 +1,35 @@
 <div>
-	haaaaaaaaaaaaaaa
+	<table>
+		<tr>
+			<td><?= $person[0]["rodne_cislo"] . " " . $person[0]["meno"] . " " . $person[0]["priezvisko"] . " " . $person[0]["vek"]?></td>
+			<td>
+				<form method="POST">
+					<input type="hidden" name="rodne_cislo" value="<?= $person[0]["rodne_cislo"] ?>">
+					<select name="hodnost">
+						<option value="<?= $hodnost ?>" selected><?= $hodnost ?></option>
+						<option value="zelenac">Zelenáč</option>				
+						<option value="uklizec">Zametač</option>
+						<option value="sofer">Šofér</option>
+						<option value="kapsar">Zlodej</option>
+						<option value="vymahac">Vymáhač</option>
+						<option value="snajper">Snajper</option>
+					</select>	
+					<input type="submit" value="Uložiť">
+				</form>
+			</td>			
+			<td>
+				<form method="POST">
+					<input type="hidden" name="rodne_cislo" value="<?= $person[0]["rodne_cislo"] ?>">
+					<?php if ($pokrvna_vazba == "ano") :?>
+						<input type="radio" name="pokrvna_vazba" value="ano" checked required>áno
+						<input type="radio" name="pokrvna_vazba" value="ne" required>nie
+					<?php else : ?>
+						<input type="radio" name="pokrvna_vazba" value="ano" required>áno
+						<input type="radio" name="pokrvna_vazba" value="ne" checked required>nie
+					<?php endif; ?>
+					<input type="submit" value="Uložiť">
+				</form>
+			</td>
+		</tr>
+	</table>
 </div>

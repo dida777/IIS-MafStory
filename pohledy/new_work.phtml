@@ -3,13 +3,35 @@
 		<p><?= $success ?></p>
 	<?php endif; ?>
 	<form method="POST" action="todolist/new_work" id="new_work">
-		<input type="hidden" name="nazov_familie" value="<?php echo $don->getNazovFamilie();?>" />
+		<?php if($_SESSION["typ"] == 1) : // don?>
+			<input type="hidden" name="nazov_familie" value="<?php echo $don->getNazovFamilie();?>" />
+		<?php endif; ?>
 		<p>Špecifické meno úlohy<input type="text" name="specificke_meno" required></p>
 		<p>Popis činnosti<input type="text" name="popis_cinnosti" required></p>
-		<p>
-			Zadávateľ<input type="radio" name="zadavatel" value="<?= $don->getRodneCislo();?>" required>Don
-			<?php if ($don->getAliancia() != NULL) :?>
-				<input type="radio" name="zadavatel" value="<?= $don->getAliancia();?>" required>Aliancia
+		<p>Zadávateľ
+			<?php if($_SESSION["typ"] == 1) : // don?>
+				<input type="radio" name="zadavatel" value="<?= $don->getRodneCislo();?>" required>Don
+				<?php if ($don->getAliancia() != NULL) :?>
+					<input type="radio" name="zadavatel" value="<?= $don->getAliancia();?>" required>Aliancia
+				<?php endif; ?>
+			<?php endif; ?>
+			<?php if($_SESSION["typ"] == 2) : // admin?>
+				<input type="text" list="don_aliancia" name="zadavatel">
+				<datalist id="don_aliancia" autocomplete="off">
+					<select>
+						<option value="" selected=""></option>
+						<?php foreach($zoz_donov as $zoznam) : ?>
+							<?php if (($zoznam["rodne_cislo"]) != "admin") : ?>
+								<option value="<?= $zoznam["rodne_cislo"]?>"><?= $zoznam["nazov_familie"]?></option>
+							<?php endif; ?>
+						<?php endforeach; ?>
+						<?php foreach($zoz_aliancii as $zoznam) : ?>
+							<?php if (($zoznam["nazov_aliancie"]) != "admin") : ?>
+								<option value="<?= $zoznam["id_aliancie"]?>"><?= $zoznam["nazov_aliancie"]?></option>
+							<?php endif; ?>
+						<?php endforeach; ?>
+					</select>				
+				</datalist>
 			<?php endif; ?>
 		</p>	
 		<p>Vykonávateľ
@@ -18,7 +40,9 @@
 				<select>
 					<option value="" selected=""></option>
 					<?php foreach($zoz_vykon as $zoznam) : ?>
-						<option value="<?= $zoznam["rodne_cislo"]?>"><?= $zoznam["meno"] . " " . $zoznam["priezvisko"]?></option>
+						<?php if (($zoznam["rodne_cislo"]) != "admin") : ?>
+							<option value="<?= $zoznam["rodne_cislo"]?>"><?= $zoznam["meno"] . " " . $zoznam["priezvisko"] . " " . $zoznam["familia"]?></option>
+						<?php endif; ?>
 					<?php endforeach; ?>
 				</select>				
 			</datalist>

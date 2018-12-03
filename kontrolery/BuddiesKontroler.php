@@ -55,21 +55,44 @@ class BuddiesKontroler extends Kontroler {
 			$this->data["person"] = "";
 			$this->data["pokrvna_vazba"] = "";
 			$this->data["hodnost"] = "";
+			$this->data["nazov_familie"] = "";
+			$this->data["gps_uzemie"] = "";
+			$this->data["aliancia"] = "";
+			$this->data["zvolal_zraz"] = "";
 
 			if (!empty($_POST) && isset($_POST["rodne_cislo"])){ //rodne cislo odoby v post
 				$this->data["person"] = Osoba::getOsoba($_POST["rodne_cislo"]);
 				if ($this->data["person"][0]["typ"] == 1) {
-					echo "son don";
+					$don = new Don($this->data["person"][0]["rodne_cislo"]);
+					$this->data["nazov_familie"] = $don->getNazovFamilie();
+					$this->data["gps_uzemie"] = $don->getGpsUzemie();
+					$this->data["aliancia"] = $don->getAliancia();
+					$this->data["zvolal_zraz"] = $don->getZvolalZraz();
+
+					$this->data["uzemie"] = Uzemie::getUzemiaBezDona();
+
+					if(!empty($_POST) && isset($_POST["rodne_cislo"]) && isset($_POST["gps_uzemie"]) && ($this->data["gps_uzemie"] != $_POST["gps_uzemie"]))
+						if(Don::zmenaUzemia($_POST["rodne_cislo"], $_POST["gps_uzemie"]) != 0)
+							$this->data["success"] = "Informácie boli upravené.";
+						else
+							$this->data["success"] = "Informácie sa nepodarilo upraviť.";
+
 				} else {
 					$clen = new Clen($this->data["person"][0]["rodne_cislo"]);
 					$this->data["pokrvna_vazba"] = $clen->getPokrvnaVazba();
 					$this->data["hodnost"] = $clen->getHodnost();
+
+					if(!empty($_POST) && isset($_POST["rodne_cislo"]) && isset($_POST["hodnost"]) && ($this->data["hodnost"] != $_POST["hodnost"]))
+						if(Clen::zmenaHodnosti($_POST["rodne_cislo"], $_POST["hodnost"]) != 0)
+							$this->data["success"] = "Informácie boli upravené.";
+						else
+							$this->data["success"] = "Informácie sa nepodarilo upraviť.";
 					
-					if(!empty($_POST) && isset($_POST["rodne_cislo"]) && isset($_POST["hodnost"]))
-						Clen::zmenaHodnosti($_POST["rodne_cislo"], $_POST["hodnost"]);
-					
-					if(!empty($_POST) && isset($_POST["rodne_cislo"]) && isset($_POST["pokrvna_vazba"]))
-						Clen::zmenaPokrvnaVazba($_POST["rodne_cislo"], $_POST["pokrvna_vazba"]);
+					if(!empty($_POST) && isset($_POST["rodne_cislo"]) && isset($_POST["pokrvna_vazba"]) && ($this->data["pokrvna_vazba"] != $_POST["pokrvna_vazba"]))
+						if(Clen::zmenaPokrvnaVazba($_POST["rodne_cislo"], $_POST["pokrvna_vazba"]) != 0)
+							$this->data["success"] = "Informácie boli upravené.";
+						else
+							$this->data["success"] = "Informácie sa nepodarilo upraviť.";
 				}
 			}
 

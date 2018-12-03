@@ -19,6 +19,9 @@ class Don {
 		}
 	}
 
+	public static function zmenaUzemia($rodne_cislo, $new_uzemie) {
+		return Db::dotaz("UPDATE Don SET gps_uzemie = ? WHERE rodne_cislo = ?", [$new_uzemie, $rodne_cislo]);
+	}
 	public static function insertDon($new_don) {
 		foreach (Db::dotazVsechny("SELECT nazov_familie FROM Don") as $every) {
 			$family_names[] = $every["nazov_familie"];

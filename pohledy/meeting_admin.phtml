@@ -1,0 +1,21 @@
+<div id="meeting_admin">
+	<h1>Editovať zraz Donov</h1>
+	<table>
+		<?php if ($zraz_donov != NULL) : ?>
+			<?php for ($i=1; $i < $pocet_zrazov; $i++) : ?>
+				<form method="POST" action="meeting/edit_zraz" id="edit_zraz">
+					<tr><td>Zraz číslo <?= $info_id[$i]; ?></td></tr>
+					<input type="hidden" name="id_zrazu" value="<?= $info_id[$i]; ?>">
+					<?php foreach($usporiadatel[$i] as $pohostitel) : ?>
+						<tr><td>Usporiadateľ:</td><td><?= $pohostitel["meno"] . " " . $pohostitel["priezvisko"]; ?></td></tr>
+					<?php endforeach; ?>
+					<tr><td>Dátum a čas:</td><td><?= $info_datumcas[$i]; ?></td></tr>
+					<tr><td>Miesto zrazu:</td><td><?= $info_miesta[$i]; ?></td></tr>
+					<tr><td><input type="submit" value="Editovať"></td></tr>
+				</form>
+			<?php endfor; ?>
+		<?php else : ?>
+			<tr><td>Žiadny zraz nie je naplanovaný.</td></tr>
+		<?php endif; ?>
+	</table>
+</div>

@@ -61,7 +61,7 @@ class HomeKontroler extends Kontroler {
 				$this->data["pocet_zrazov"] = count($idcka_zrazov);
 
 				foreach ($idcka_zrazov as $zvolalZraz) {
-					$this->data["zraz_donov"] = new Zraz($zvolalZraz);
+					$this->data["zraz_donov"] = new Zraz($zvolalZraz["zvolal_zraz"]);
 					$this->data["info_miesta"][] = $this->data["zraz_donov"]->getGpsMiesta();
 					$this->data["info_id"][] = $this->data["zraz_donov"]->getIdZrazu();
 					$this->data["info_datumcas"][] = $this->data["zraz_donov"]->getDatumCas();

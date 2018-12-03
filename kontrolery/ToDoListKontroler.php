@@ -23,12 +23,15 @@ class ToDoListKontroler extends Kontroler {
 				}
 			}
 
-			// prihlaseny je DON alebo ADMIN
-			if ($_SESSION["typ"] != 0) {
+			if ($_SESSION["typ"] == 2) { // admin
+				$this->data["ulohy"] = Uloha::getAdminUlohy();
+			}
+
+			if ($_SESSION["typ"] == 1) { // DON
 				$don = new Don($_SESSION["rodne_cislo"]);
 				$aliancia = new Aliancia($don->getAliancia());
 				$this->data["ulohy"] = Uloha::getDonUlohy($_SESSION["rodne_cislo"], $aliancia->getIdAliancie());
-			} else {
+			} elseif ($_SESSION["typ"] == 0) { // Clen
 				$this->data["ulohy"] = Uloha::getClenUlohy($_SESSION["rodne_cislo"]);
 			}
 
@@ -58,12 +61,22 @@ class ToDoListKontroler extends Kontroler {
 			$this->pohled = 'new_work';
 			$this->data["success"] = "";
 			$this->hlavicka['titulek'] = 'Zadať novú úlohu';
-			$this->data["don"] = new Don($_SESSION["rodne_cislo"]);
-			$familia = $this->data["don"]->getNazovFamilie();
-			$this->data["zoz_vykon"] = Don::getZoznamVykonavatelov($familia);
 			$this->data["uzemia"] = Uzemie::getUzemia();
+			
+			if($_SESSION["typ"] == 1){ //don
+				$this->data["don"] = new Don($_SESSION["rodne_cislo"]);
+				$familia = $this->data["don"]->getNazovFamilie();
+				$this->data["zoz_vykon"] = Don::getZoznamVykonavatelov($familia);
+			}
+
+			if($_SESSION["typ"] == 2){ //admin
+				$this->data["zoz_donov"] = Don::getZoznamDonov();
+				$this->data["zoz_vykon"] = Don::getZoznamVykonavatelovAdmin();
+				$this->data["zoz_aliancii"] = Aliancia::getAliance();
+			}
 
 			$timeout = 600; // Number of seconds until it times out.
+			
 
 			// Auto - logout
 			if(isset($_SESSION['timeout'])) {

@@ -92,8 +92,6 @@ textarea {
 
 }
 
-
-
 #chyba {
 	width: 100%;
 	text-align: center;
@@ -212,17 +210,6 @@ textarea {
 	float: left;
 }
 
-/*#add {
-	border: 1px solid #000000;
-	border-radius: 10px;
-	background-color: grey;
-	float: right;
-	padding: 10px;
-	width: 20%;
-	margin-right: -10px;
-	height: 100px;
-}*/
-
 #new_buddy { 
 	width: 80%;
 	margin: auto;
@@ -233,9 +220,11 @@ textarea {
 	margin-top: 20px;
 	height: 100%;
 }
+
 #new_buddy table {
 	margin: auto;
 }
+
 #new_don { 
 	width: 80%;
 	margin: auto;
@@ -246,57 +235,51 @@ textarea {
 	margin-top: 20px;
 	height: 100%;
 }
+
 #new_don table {
 	margin: auto;
 }
-/*.vek {
-	margin-left: 1px;
-}*/
-
 
 #udaje {
 	border: 1px solid #000000;
 	border-radius: 10px;
 	padding: 10px;
 	background-color: grey;
-	width: 70%;
-	margin-bottom: 20px;
+	width: 100%;
+	margin-bottom: 30px;
 
-	/*margin-left: -10px;
-	height: 100px;
-	float: left;*/
 }
 #udaje_clen {
 	border: 1px solid #000000;
 	border-radius: 10px;
 	padding: 10px;
 	background-color: grey;
-	width: 70%;	
-	margin-bottom: 20px;
+	width: 100%;	
+	margin-bottom: 30px;
 }
 #udaje_don {
 	border: 1px solid #000000;
 	border-radius: 10px;
 	padding: 10px;
 	background-color: grey;
-	width: 80%;	
-	margin-bottom: 20px;
+	width: 100%;	
+	margin-bottom: 30px;
 }
 #zraz_donov {
 	border: 1px solid #000000;
 	border-radius: 10px;
 	padding: 10px;
 	background-color: grey;
-	width: 80%;	
-	margin-bottom: 20px;
+	width: 100%;	
+	margin-bottom: 30px;
 }
 #uloha {
 	border: 1px solid #000000;
 	border-radius: 10px;
 	padding: 10px;
 	background-color: grey;
-	width: 80%;	
-	margin-bottom: 20px;
+	width: 85%;	
+	margin-bottom: 30px;
 }
 #uloha td, #uloha table {
 	height: 25px;
@@ -314,50 +297,3 @@ textarea {
 	padding: 5px;
 }
 
-/*#edit_clen table, #edit_clent td {
-	border-bottom: 1px solid black;
-	border-collapse: collapse;
-	width: 65%;
-	height: 20px;
-	padding: 5px;
-
-}
-#edit_clen th {
-	height: 40px;
-	text-align: left;
-}*/
-
-
-/*#edit_clen table, #edit_clen th, #edit_clen td {
-    border: 1px solid black;
-}
-*/
-
-
-
-/*#uloha tr, #uloha td {
-	border-bottom: 1px solid black;
-}*/
-/*	border: 1px solid #000000;
-	border-radius: 10px;
-	padding: 10px;
-	background-color: grey;
-	width: 70%;
-	margin-left: -10px;
-	height: 100px;
-	float: left;*/
-}
-/*#udaje_new_buddy td, #udaje_new_buddy table {
-	height: 25px;
-	border-bottom: 1px solid #595959;
-	border-collapse: collapse;
-	width: 65%;
-	padding: 5px;*/
-}
-/*#new_don_table td, #new_don_table table {
-	height: 25px;
-	border-bottom: 1px solid #595959;
-	border-collapse: collapse;
-	width: 65%;
-	padding: 5px;
-}*/

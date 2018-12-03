@@ -7,9 +7,6 @@ body {
     background-attachment: fixed;
 }
 
-article {
-	
-}
 
 h1 { /* main title */
 	text-align: center;
@@ -215,7 +212,7 @@ textarea {
 	float: left;
 }
 
-#add {
+/*#add {
 	border: 1px solid #000000;
 	border-radius: 10px;
 	background-color: grey;
@@ -224,7 +221,7 @@ textarea {
 	width: 20%;
 	margin-right: -10px;
 	height: 100px;
-}
+}*/
 
 #new_buddy {
 	width: 80%;
@@ -234,6 +231,7 @@ textarea {
 	padding: 10px;
 	background-color: grey;
 	margin-top: 20px;
+	height: 100%;
 }
 #udaje {
 	border: 1px solid #000000;
@@ -289,3 +287,19 @@ textarea {
 /*#uloha tr, #uloha td {
 	border-bottom: 1px solid black;
 }*/
+/*	border: 1px solid #000000;
+	border-radius: 10px;
+	padding: 10px;
+	background-color: grey;
+	width: 70%;
+	margin-left: -10px;
+	height: 100px;
+	float: left;*/
+}
+/*#udaje_new_buddy td, #udaje_new_buddy table {
+	height: 25px;
+	border-bottom: 1px solid #595959;
+	border-collapse: collapse;
+	width: 65%;
+	padding: 5px;*/
+}

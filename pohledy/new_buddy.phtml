@@ -3,31 +3,35 @@
 		<p><?= $success ?></p>
 	<?php endif; ?>
 	<form method="POST" action="buddies/new_buddy" id="add">
-		<input type="hidden" name="nazov_familie" value="<?php echo $don->getNazovFamilie();?>" />
-		<input type="hidden" name="typ" value="0" />
-		<p>Meno<input type="text" name="meno" required></p>
-		<p>Priezvisko<input type="text" name="priezvisko" required></p>
-		<p>Rodné číslo<input type="text" name="rodne_cislo" required></p>
-		<p>Vek<input type="number" name="vek" required></p>
-		<p>Heslo<input type="text" name="heslo" required></p>
-		<p>Hodnosť
-			<input type="text" list="hodnost" name="hodnost">
-			<datalist id="hodnost" autocomplete="off">
-				<select>
-					<option value="" selected=""></option>
-					<option value="zelenac"></option>				
-					<option value="uklizec"></option>
-					<option value="sofer"></option>
-					<option value="kapsar"></option>
-					<option value="vymahac"></option>
-					<option value="snajper"></option>
-				</select>
-			</datalist>
-		</p>
-		<p>
-			Pokrvná väzba<input type="radio" name="pokrvna_vazba" value="ano" required>áno
-			<input type="radio" name="pokrvna_vazba" value="ne" required>nie
-		</p>
+		<div id="udaje_new_buddy">
+			<table>
+				<input type="hidden" name="nazov_familie" value="<?php echo $don->getNazovFamilie();?>" />
+				<input type="hidden" name="typ" value="0" />
+				<tr><td>Meno<input type="text" name="meno" required></td></tr>
+				<tr><td>Priezvisko<input type="text" name="priezvisko" required></td></tr>
+				<tr><td>Rodné číslo<input type="text" name="rodne_cislo" required></td></tr>
+				<tr><td>Vek<input type="number" name="vek" required></td></tr>
+				<tr><td>Heslo<input type="text" name="heslo" required></td></tr>
+				<tr><td>Hodnosť
+					<input type="text" list="hodnost" name="hodnost">
+					<datalist id="hodnost" autocomplete="off">
+						<select>
+							<option value="" selected=""></option>
+							<option value="zelenac"></option>				
+							<option value="uklizec"></option>
+							<option value="sofer"></option>
+							<option value="kapsar"></option>
+							<option value="vymahac"></option>
+							<option value="snajper"></option>
+						</select>
+					</datalist>
+				</td></tr>
+				<tr><td>
+					Pokrvná väzba<input type="radio" name="pokrvna_vazba" value="ano" required>áno
+					<input type="radio" name="pokrvna_vazba" value="ne" required>nie
+				</td></tr>
+			</table>
+		</div>
 		<input type="submit" value="Pridať">
 	</form>
 </div>

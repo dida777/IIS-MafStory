@@ -9,38 +9,42 @@
 	<?php endif; ?>
 	<?php foreach($ulohy as $uloha) : ?>
 		<?php if($uloha["specificke_meno"] != "admin") : ?>
-			<p><?php if ($uloha["zadavatel_don"] != NULL) echo "Don:"; else echo "Aliancia:" ?></p>
-			<p>Meno: <?= $uloha["specificke_meno"] ?></p>
-			<p>Popis činnosti: <?= $uloha["popis_cinnosti"] ?></p>
-			<p>Vykonávateľ: <?= $uloha["vykonavatel"] ?></p>
-			<p>Zadávateľ: <?php if ($uloha["zadavatel_don"] != NULL) echo $uloha["zadavatel_don"]; else echo $uloha["zadavatel_aliancia"] ?></p>
-			<p>Miesto: <?= $uloha["gps_miesta"] ?></p>
-			<?php if($uloha["cas_zaciatku"] == NULL) : ?>
-				<p>Čas začiatku: </p>
-				<form method="POST" action="todolist/zacat">
-					<input type="datetime-local" name="cas_zaciatku" required>
-					<input type="hidden" name="specificke_meno" value="<?= $uloha["specificke_meno"] ?>">
-					<input type="submit" value="Začať úlohu">
-				</form>
-			<?php else :?>
-				<p>Čas začiatku: <?= $uloha["cas_zaciatku"] ?></p>	
-				<?php if ($uloha["cas_konca"] == NULL) :?>
-				<form method="POST" action="todolist/ukoncit">	
-					<p>Čas konca: </p>
-					<input type="datetime-local" name="cas_konca" required>
-					<input type="hidden" name="specificke_meno" value="<?= $uloha["specificke_meno"] ?>">		
-					<p>Úspesnosť: 
-						<input type="radio" name="uspesnost" value="ano" required>áno
-						<input type="radio" name="uspesnost" value="ne" required>nie
-					</p>
-					<p>Komentár: <input type="text" name="komentar" required></p>
-					<input type="submit" value="Ukončiť úlohu">		
-				</form>
-				<?php else : ?>
-					<p>Čas konca: <?= $uloha["cas_konca"] ?></p>
-					<p>Úspesnosť: <?= $uloha["uspesnost"] ?></p>
-					<p>Komentár: <?= $uloha["komentar"] ?></p>
-				<?php endif;?>				
+			<div id="uloha">
+				<table>
+					<tr><td><?php if ($uloha["zadavatel_don"] != NULL) echo "Zadano Donem"; else echo "Zadano Alianciou" ?></td><td></td></tr>
+					<tr><td>Meno: </td><td> <?= $uloha["specificke_meno"] ?></td></tr>
+					<tr><td>Popis činnosti: </td><td> <?= $uloha["popis_cinnosti"] ?></td></tr>
+					<tr><td>Vykonávateľ: </td><td> <?= $uloha["vykonavatel"] ?></td></tr>
+					<tr><td>Zadávateľ: </td><td> <?php if ($uloha["zadavatel_don"] != NULL) echo $uloha["zadavatel_don"]; else echo $uloha["zadavatel_aliancia"] ?></td></tr>
+					<tr><td>Miesto: </td><td> <?= $uloha["gps_miesta"] ?></td></tr>
+					<?php if($uloha["cas_zaciatku"] == NULL) : ?>
+						<tr><td>Čas začiatku: </td></tr>
+						<form method="POST" action="todolist/zacat">
+							<input type="datetime-local" name="cas_zaciatku" required>
+							<input type="hidden" name="specificke_meno" value="<?= $uloha["specificke_meno"] ?>">
+							<tr> <td></td> <td><input type="submit" value="Začať úlohu"> </td></tr>
+						</form>
+					<?php else :?>
+						<tr><td>Čas začiatku: </td><td> <?= $uloha["cas_zaciatku"] ?></td></tr>
+						<?php if ($uloha["cas_konca"] == NULL) :?>
+							<form method="POST" action="todolist/ukoncit">	
+								<tr><td>Čas konca: </td><td>
+								<input type="datetime-local" name="cas_konca" required></td></tr>
+								<input type="hidden" name="specificke_meno" value="<?= $uloha["specificke_meno"] ?>">		
+								<tr><td>Úspesnosť: </td><td>
+									<input type="radio" name="uspesnost" value="ano" required>áno
+									<input type="radio" name="uspesnost" value="ne" required>nie
+								</td></tr>
+								<tr><td>Komentár: </td><td> <input type="text" name="komentar" required></td></tr>
+								<tr> <td></td> <td><input type="submit" value="Ukončiť úlohu">	</td></tr>	
+							</form>				
+						<?php else : ?>
+							<tr><td>Čas konca: </td><td><?= $uloha["cas_konca"] ?></td></tr>
+							<tr><td>Úspesnosť: </td><td><?= $uloha["uspesnost"] ?></td></tr>
+							<tr><td>Komentár: </td><td><?= $uloha["komentar"] ?></td></tr>
+						<?php endif;?>	
+				</table>
+			</div>				
 			<?php endif;?>	
 		<?php endif; ?>
 	<?php endforeach; ?>

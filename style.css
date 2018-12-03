@@ -237,3 +237,39 @@ textarea {
 	background-color: grey;
 	margin-top: 20px;
 }
+#udaje {
+	border: 1px solid #000000;
+	border-radius: 10px;
+	padding: 10px;
+	background-color: grey;
+	width: 70%;
+	margin-bottom: 20px;
+
+	/*margin-left: -10px;
+	height: 100px;
+	float: left;*/
+}
+#udaje_clen {
+	border: 1px solid #000000;
+	border-radius: 10px;
+	padding: 10px;
+	background-color: grey;
+	width: 70%;	
+	margin-bottom: 20px;
+}
+#udaje_don {
+	border: 1px solid #000000;
+	border-radius: 10px;
+	padding: 10px;
+	background-color: grey;
+	width: 80%;	
+	margin-bottom: 20px;
+}
+#zraz_donov {
+	border: 1px solid #000000;
+	border-radius: 10px;
+	padding: 10px;
+	background-color: grey;
+	width: 80%;	
+	margin-bottom: 20px;
+}

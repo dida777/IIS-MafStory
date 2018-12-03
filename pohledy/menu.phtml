@@ -3,16 +3,29 @@
 		<p><?= $success ?></p>
 	<?php endif; ?>
 	<?php if($_SESSION["typ"] != 2) : //DON alebo CLEN?>
-		<p>Meno: <?= $info_meno; ?></p>
-		<p>Priezvisko: <?= $info_priezvisko; ?></p>
-		<p>Vek: <?= $info_vek; ?></p>
+
+		<?php if($_SESSION["typ"] == 1) : //DON ?>
+			<h1>DON</h1>
+		<?php else : ?> 
+			<h1>CLEN</h1>
+		<?php endif; ?>
+		<div id="udaje">
+			<table>
+				<tr><td>Meno: <?= $info_meno; ?></td></tr>
+				<tr><td>Priezvisko: <?= $info_priezvisko; ?></td></tr>
+				<tr><td>Vek: <?= $info_vek; ?></td></tr>
+			</table>
+		</div>
 	<?php endif; ?>
 	<?php if($_SESSION["typ"] == 2) : //ADMIN ?>
 		<h1>ADMIN</h1>
 	<?php else : //CLEN alebo DON ?> 
 		<?php if($_SESSION["typ"] == 1) : //DON ?>
-			<p>Moje uzemie: <?= $info_uzemie; ?></p>
-			<h1>DON</h1>
+			<div id="udaje_don">
+				<table>
+					<tr><td>Moje uzemie: <?= $info_uzemie; ?></td></tr>
+				</table>
+			</div>
 			<div id="aliancia">
 				<table>
 					<tr><th colspan="2">Tvoja aliancia</th></tr>
@@ -52,9 +65,12 @@
 				</table>	
 			</div> 
 		<?php else : //CLEN ?> 
-			<h1>ČLEN</h1>
-			<p>Hodnosť: <?= $info_hodnost; ?></p>
-			<p>Pokrvná väzba s donom: <?= $info_pokr_vazba; ?></p>
+			<div id="udaje_clen">
+				<table>
+					<tr><td>Hodnosť: <?= $info_hodnost; ?></td></tr>
+					<tr><td>Pokrvná väzba s donom: <?= $info_pokr_vazba; ?></td></tr>
+				</table>
+			</div>
 		<?php endif; ?>
 		<div id="vypis_ulohy">
 			<table>
@@ -70,7 +86,7 @@
 				<tr><th colspan="2">Tvoja família</th></tr>
 				<tr><td>Názov famílie: </td><td><?= $nazovFamilie ?></td></tr>
 				<tr><td>Don: </td><td><?= $sefFamilie["meno"] . " " . $sefFamilie["priezvisko"] ?></td></tr>
-				<?php if($_SESSION["typ"] != 0) : //DON alebo ADMIN?>
+				<?php if($_SESSION["typ"] == 1) : //DON ?>
 					<tr><td colspan="2">Členovia: </td></tr>
 						<?php foreach($zoznamClenov as $clen) : ?> 
 							<tr>

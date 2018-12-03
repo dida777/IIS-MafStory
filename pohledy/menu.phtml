@@ -2,97 +2,103 @@
 	<?php if ($success != "") :?>
 		<p><?= $success ?></p>
 	<?php endif; ?>
-	<p>Meno: <?= $info_meno; ?></p>
-	<p>Priezvisko: <?= $info_priezvisko; ?></p>
-	<p>Vek: <?= $info_vek; ?></p>
-	<?php if($_SESSION["typ"] != 0) : //DON alebo ADMIN?>
-		<h1>DON</h1>
-		<p>Moje uzemie: <?= $info_uzemie; ?></p>
-		<div id="aliancia">
-			<table>
-				<tr><th colspan="2">Tvoja aliancia</th></tr>
-				<?php if ($aliancia->getIdAliancie() != NULL) : ?>
-					<tr><td>Názov aliencie:</td><td><?= $aliancia->getNazovAliancie(); ?></td></tr>
-					<tr>
-						<td>Dátum vzniku aliancie:</td><td><?= $aliancia->getDatumVzniku(); ?></td>
-						<form method="POST" action="home/zrusena_aliancia" id="del_aliancia">
-							<td><input type="submit" value="Zrušiť alianciu"></td>
-							<input type="hidden" name="del_aliancia" value="NULL">
-						</form>
-					</tr>
-				<?php else : ?>
-					<tr>
-						<form method="POST" action="home/add_aliancia" id="new_aliancia">
-							<td><input type="submit" value="Pridať alianciu"></td>
-						</form>
-					</tr>
-				<?php endif; ?>
-			</table>	
-		</div>
-		<div id="zraz_donov">
-			<table>
-				<tr><th colspan="2">Zraz donov</th></tr>
-				<?php if ($zraz_donov != NULL) : ?>
-					<?php for ($i=1; $i < $pocet_zrazov; $i++) : ?>
-						<tr><td>Zraz číslo <?= $info_id[$i]; ?></td></tr>
-						<?php foreach($usporiadatel[$i] as $pohostitel) : ?>
-							<tr><td>Usporiadateľ:</td><td><?= $pohostitel["meno"] . " " . $pohostitel["priezvisko"]; ?></td></tr>
-						<?php endforeach; ?>
-						<tr><td>Dátum a čas:</td><td><?= $info_datumcas[$i]; ?></td></tr>
-						<tr><td>Miesto zrazu:</td><td><?= $info_miesta[$i]; ?></td></tr>
-					<?php endfor; ?>
-				<?php else : ?>
-					<tr><td>Žiadny zraz nie je naplanovaný.</td></tr>
-				<?php endif; ?>
-			</table>	
-		</div> 
-	<?php else : ?>
-		<h1>ČLEN</h1>
-		<p>Hodnosť: <?= $info_hodnost; ?></p>
-		<p>Pokrvná väzba s donom: <?= $info_pokr_vazba; ?></p>
+	<?php if($_SESSION["typ"] != 2) : //DON alebo CLEN?>
+		<p>Meno: <?= $info_meno; ?></p>
+		<p>Priezvisko: <?= $info_priezvisko; ?></p>
+		<p>Vek: <?= $info_vek; ?></p>
 	<?php endif; ?>
-	<div id="vypis_ulohy">
-		<table>
-			<tr><th colspan="2">Zadané ulohy</th></tr>
-			<?php if(empty($ulohy)) : ?><tr><td>Žadne zadané úlohy</td><tr><?php endif; ?>
-			<?php foreach($ulohy as $uloha) : ?>
-				<tr><td><?= $uloha["specificke_meno"] ?></td></tr>
-			<?php endforeach; ?>
-		</table>
-	</div>
-	<div id="familia">
-		<table>
-			<tr><th colspan="2">Tvoja família</th></tr>
-			<tr><td>Názov famílie: </td><td><?= $nazovFamilie ?></td></tr>
-			<tr><td>Don: </td><td><?= $sefFamilie["meno"] . " " . $sefFamilie["priezvisko"] ?></td></tr>
-			<?php if($_SESSION["typ"] != 0) : //DON alebo ADMIN?>
-				<tr><td colspan="2">Členovia: </td></tr>
-					<?php foreach($zoznamClenov as $clen) : ?> 
+	<?php if($_SESSION["typ"] == 2) : //ADMIN ?>
+		<h1>ADMIN</h1>
+	<?php else : //CLEN alebo DON ?> 
+		<?php if($_SESSION["typ"] == 1) : //DON ?>
+			<p>Moje uzemie: <?= $info_uzemie; ?></p>
+			<h1>DON</h1>
+			<div id="aliancia">
+				<table>
+					<tr><th colspan="2">Tvoja aliancia</th></tr>
+					<?php if ($aliancia->getIdAliancie() != NULL) : ?>
+						<tr><td>Názov aliencie:</td><td><?= $aliancia->getNazovAliancie(); ?></td></tr>
 						<tr>
-							<td><?= $clen["meno"] . " " . $clen["priezvisko"]?></td>
-							<td>
-								<form method="POST">
-									<input type="hidden" name="rodne_cislo" value="<?= $clen["rodne_cislo"] ?>">
-									<select name="hodnost">
-										<option value="<?= $clen["hodnost"] ?>" selected><?= $clen["hodnost"] ?></option>
-										<option value="zelenac">Zelenáč</option>				
-										<option value="uklizec">Zametač</option>
-										<option value="sofer">Šofér</option>
-										<option value="kapsar">Zlodej</option>
-										<option value="vymahac">Vymáhač</option>
-										<option value="snajper">Snajper</option>
-									</select>	
-									<input type="submit" value="Uložiť">
-								</form>
-							</td>
+							<td>Dátum vzniku aliancie:</td><td><?= $aliancia->getDatumVzniku(); ?></td>
+							<form method="POST" action="home/zrusena_aliancia" id="del_aliancia">
+								<td><input type="submit" value="Zrušiť alianciu"></td>
+								<input type="hidden" name="del_aliancia" value="NULL">
+							</form>
 						</tr>
-					<?php endforeach; ?>
-			<?php else : ?>
-				<tr><td colspan="2">Členovia: </td></tr>
-					<?php foreach($zoznamClenov as $clen) : ?> 
-						<tr><td></td><td><?= $clen["meno"] . " " . $clen["priezvisko"] ?></td></tr>
-					<?php endforeach; ?>
-			<?php endif; ?>
-		</table>
-	</div>
+					<?php else : ?>
+						<tr>
+							<form method="POST" action="home/add_aliancia" id="new_aliancia">
+								<td><input type="submit" value="Pridať alianciu"></td>
+							</form>
+						</tr>
+					<?php endif; ?>
+				</table>	
+			</div>
+			<div id="zraz_donov">
+				<table>
+					<tr><th colspan="2">Zraz donov</th></tr>
+					<?php if ($zraz_donov != NULL) : ?>
+						<?php for ($i=1; $i < $pocet_zrazov; $i++) : ?>
+							<tr><td>Zraz číslo <?= $info_id[$i]; ?></td></tr>
+							<?php foreach($usporiadatel[$i] as $pohostitel) : ?>
+								<tr><td>Usporiadateľ:</td><td><?= $pohostitel["meno"] . " " . $pohostitel["priezvisko"]; ?></td></tr>
+							<?php endforeach; ?>
+							<tr><td>Dátum a čas:</td><td><?= $info_datumcas[$i]; ?></td></tr>
+							<tr><td>Miesto zrazu:</td><td><?= $info_miesta[$i]; ?></td></tr>
+						<?php endfor; ?>
+					<?php else : ?>
+						<tr><td>Žiadny zraz nie je naplanovaný.</td></tr>
+					<?php endif; ?>
+				</table>	
+			</div> 
+		<?php else : //CLEN ?> 
+			<h1>ČLEN</h1>
+			<p>Hodnosť: <?= $info_hodnost; ?></p>
+			<p>Pokrvná väzba s donom: <?= $info_pokr_vazba; ?></p>
+		<?php endif; ?>
+		<div id="vypis_ulohy">
+			<table>
+				<tr><th colspan="2">Zadané ulohy</th></tr>
+				<?php if(empty($ulohy)) : ?><tr><td>Žadne zadané úlohy</td><tr><?php endif; ?>
+				<?php foreach($ulohy as $uloha) : ?>
+					<tr><td><?= $uloha["specificke_meno"] ?></td></tr>
+				<?php endforeach; ?>
+			</table>
+		</div>
+		<div id="familia">
+			<table>
+				<tr><th colspan="2">Tvoja família</th></tr>
+				<tr><td>Názov famílie: </td><td><?= $nazovFamilie ?></td></tr>
+				<tr><td>Don: </td><td><?= $sefFamilie["meno"] . " " . $sefFamilie["priezvisko"] ?></td></tr>
+				<?php if($_SESSION["typ"] != 0) : //DON alebo ADMIN?>
+					<tr><td colspan="2">Členovia: </td></tr>
+						<?php foreach($zoznamClenov as $clen) : ?> 
+							<tr>
+								<td><?= $clen["meno"] . " " . $clen["priezvisko"]?></td>
+								<td>
+									<form method="POST">
+										<input type="hidden" name="rodne_cislo" value="<?= $clen["rodne_cislo"] ?>">
+										<select name="hodnost">
+											<option value="<?= $clen["hodnost"] ?>" selected><?= $clen["hodnost"] ?></option>
+											<option value="zelenac">Zelenáč</option>				
+											<option value="uklizec">Zametač</option>
+											<option value="sofer">Šofér</option>
+											<option value="kapsar">Zlodej</option>
+											<option value="vymahac">Vymáhač</option>
+											<option value="snajper">Snajper</option>
+										</select>	
+										<input type="submit" value="Uložiť">
+									</form>
+								</td>
+							</tr>
+						<?php endforeach; ?>
+				<?php else : ?>
+					<tr><td colspan="2">Členovia: </td></tr>
+						<?php foreach($zoznamClenov as $clen) : ?> 
+							<tr><td></td><td><?= $clen["meno"] . " " . $clen["priezvisko"] ?></td></tr>
+						<?php endforeach; ?>
+				<?php endif; ?>
+			</table>
+		</div>
+	<?php endif; ?>
 </div>

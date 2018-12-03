@@ -17,6 +17,14 @@ class Zraz {
 		}
 	}
 
+	public static function updateCas($id_zraz, $dat_cas) {
+		return Db::dotaz("UPDATE Zraz_donov SET datum_cas = ? WHERE id_zrazu = ?", [$dat_cas, $id_zraz]);
+	}
+
+	public static function updateMiesto($id_zraz, $gps_miesta) {
+		return Db::dotaz("UPDATE Zraz_donov SET gps_miesta = ? WHERE id_zrazu = ?", [$gps_miesta, $id_zraz]);
+	}
+
 	public static function delZrazu($id_zraz) {
 		return Db::dotaz("DELETE FROM Zraz_donov WHERE id_zrazu = ?", [$id_zraz]);
 	}

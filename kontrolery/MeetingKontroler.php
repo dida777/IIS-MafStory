@@ -87,11 +87,34 @@ class MeetingKontroler extends Kontroler {
 		if (isset($_SESSION["rodne_cislo"]) && $_SESSION["typ"] == 2) {
 			$this->hlavicka['titulek'] = 'Editing meeting';
 			$this->pohled = 'meeting_admin_edit';
+			$this->data["uzemia"] = Uzemie::getUzemia();
+			$this->data["success"] = "";
+			$this->data["dat_zraz"] = "";
+			$this->data["gps_zraz"] = "";
 
 			if (!empty($_POST) && isset($_POST["id_zrazu"])) { // v $POST mam id_zrazu
 				$this->data["zraz_new"] = new Zraz($_POST["id_zrazu"]);
 				$this->data["usporiadatel_zraz"] = $this->data["zraz_new"]->getUsporiadatel();
+				$this->data["id_zraz"] = $this->data["zraz_new"]->getIdZrazu();
+				$this->data["dat_zraz"] = $this->data["zraz_new"]->getDatumCas();
+				$this->data["gps_zraz"] = $this->data["zraz_new"]->getGpsMiesta();
+
 			}
+
+			if (!empty($_POST) && isset($_POST["id_zraz"]) && isset($_POST["datum_cas"]) && ($_POST["datum_cas"] != $this->data["dat_zraz"])){
+				if(Zraz::updateCas($_POST["id_zraz"], $_POST["datum_cas"]) != 0)
+					$this->data["success"] = "Informácie boli upravené.";
+				else
+					$this->data["success"] = "Informácie sa nepodarilo upraviť.2";
+			}
+
+			if(!empty($_POST) && isset($_POST["id_zraz"]) && isset($_POST["gps_miesta"]) && ($this->data["gps_zraz"] != $_POST["gps_miesta"])){
+				if(Zraz::updateMiesto($_POST["id_zraz"], $_POST["gps_miesta"]) != 0)
+					$this->data["success"] = "Informácie boli upravené.";
+				else
+					$this->data["success"] = "Informácie sa nepodarilo upraviť.1";
+			}
+
 		}else
 			$this->pohled = 'chyba';
 	}

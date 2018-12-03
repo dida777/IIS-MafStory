@@ -1,3 +1,31 @@
 <div>
-	sgsdgsd
+	<?php if ($success != "") :?>
+		<p><?= $success ?></p>
+	<?php else: ?>
+		<table>
+			<form method="POST" action="meeting/edit_zraz" id="edit_zraz">
+				<tr><td>Zraz číslo <?= $id_zraz; ?><input type="hidden" name="id_zraz" value="<?= $id_zraz; ?>"></td></tr>
+				<tr><td>Rodné číslo usporiadateľa:</td><td><?= $usporiadatel_zraz; ?></td></tr>
+				<tr><td>Dátum a čas:
+					</td><td><?= $dat_zraz; ?></td>
+					<td><input type="datetime-local" name="datum_cas"></td></tr>
+				<tr><td>Miesto zrazu:</td>
+					<td>
+						<input type="text" list="uzemie" name="gps_miesta">
+						<datalist id="uzemie" autocomplete="off">
+							<select>
+								<option value="<?= $gps_zraz?>" selected>Aktuálna</option>
+								<?php foreach($uzemia as $miesto) : ?>
+									<?php if ($miesto["gps"] != "admin") :?>
+										<option value="<?= $miesto["gps"]?>"><?= $miesto["hodnota"]?></option>
+									<?php endif; ?>
+								<?php endforeach; ?>
+							</select>				
+						</datalist>
+					</td>
+				</tr>
+				<input type="submit" value="Uložiť zmeny">
+			</form>
+		</table>
+	<?php endif; ?>
 </div>

@@ -13,11 +13,22 @@
 				<input type="submit" value="Pridať člena">
 			</form>
 		<?php endif; ?>
+		<?php if($_SESSION["typ"] == 2) : //ADMIN?>
+			<form method="POST" action="buddies/new_don" id="add">
+				<input type="submit" value="Pridať Dona">
+			</form>
+		<?php endif; ?>
 	</div>
 	<div id="osoby_result">		
 		<table>
 			<tr><th>Rodne cislo</th><th>Meno</th><th>Priezvisko</th><th>Vek</th><th>Don/Clen</th></tr>
 			<?php if (($hladanaOsoba) != NULL) : ?>
+				<?php if(count($hladanaOsoba) == 1 && $_SESSION["typ"] == 2) : //len jeden vysledok a prihlaseny je ADMIN?>
+					<form method="POST" action="buddies/edit_person">
+						<input type="hidden" name="rodne_cislo" value="<?= $hladanaOsoba[0]["rodne_cislo"]; ?>">
+						<input type="submit" value="Editovať vybranú osobu">
+					</form>
+				<?php endif; ?>
 				<?php foreach($hladanaOsoba as $persona) : ?>
 					<tr>
 						<td><?= $persona["rodne_cislo"] ?></td>

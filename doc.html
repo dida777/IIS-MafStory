@@ -1,0 +1,35 @@
+Informačný systém pre Mafiu
+Autori
+Diana Barnová xbarno00@stud.fit.vutbr.cz - databázový subsystém a správa uživatelů
+Monika Burešová xbure32@stud.fit.vutbr.cz - uživatelské rozhraní a výzor stránky
+URL aplikace
+Nepodarilo sa nám aplikáciu dostať na zadanú stránku školy (http://www.stud.fit.vutbr.cz/~xbarno00/IIS/home) kvôli odmietaniu preístupu, skúšala som aj prekonfigurovať nastavenia na servery eva ale nepomohlo to preto je naša aplikácia len na localhost
+úvodná stránka: http://localhost-home 
+databáza: http://localhost/phpmyadmin/index.php
+
+Uživatelé systému pro testování
+
+Login		Heslo	Role
+admin		admin	Administrátor
+9754034862	1234	Don
+0051010014	1234	Člen
+
+Implementace
+home.php -> úvodná stranka pred prihlásením
+menu.php -> zručiť/pridať alianciu, zobraziť famíliu, pridelenie hodnosti členovi
+todolist.php -> zobrazenie úloh, potvrdenie o začatí/ukončení úlohy, 
+new_work.php -> zadať novú úlohu (vybrať vykonávateľa, zadať úlohu v mene aliancie)
+buddies.php -> vyhľadať osobu, pridať nového člena/dona, upraviť člena/dona
+meeting.php -> zobraziť/zorganizovať zraz donov
+databáza má názov xbarno00
+
+V IS nie je naimplementované Zmazať dona lebo je veľmi dôležitá postava databazy. 
+
+Instalace
+Pre každú novú záložku sme založili nový Kontroler a tak isto aj pohľad (View) avšak jeden kontroler má aj viacej view.
+
+Softwarové požadavky
+Implementácia je robená v jazyku php5 - Modely a Kontrolery. Pohledy sú písané v jazyku html s pridaním php5. Výsledný výzor stránky je napísaný v jazyku css.
+
+Známé problémy
+Okrem nenaimplementovania prípadu užitia Zmazať dona, ktoý sme uviedli už vyšie náš vyspedný produkt spĺňa všetky parametre zadania.

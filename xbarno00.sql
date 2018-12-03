@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hostiteľ: 127.0.0.1
--- Čas generovania: Po 03.Dec 2018, 17:25
+-- Čas generovania: Po 03.Dec 2018, 23:54
 -- Verzia serveru: 10.1.37-MariaDB
 -- Verzia PHP: 7.2.12
 
@@ -61,7 +61,7 @@ CREATE TABLE `clen` (
 --
 
 INSERT INTO `clen` (`rodne_cislo`, `familia`, `hodnost`, `pokrvna_vazba`) VALUES
-('0001010009', 'Morello Cartel', 'kapsar', 'ne'),
+('0001010009', 'Morello Cartel', 'uklizec', 'ne'),
 ('0051010014', 'Monique Cartel', 'snajper', 'ano'),
 ('0862060012', 'Salieri Cartel', 'sofer/ridic', 'ne'),
 ('205328002', 'Reynosa Cartel', 'sofer/ridic', 'ano'),
@@ -98,8 +98,8 @@ INSERT INTO `don` (`rodne_cislo`, `nazov_familie`, `gps_uzemie`, `aliancia`, `zv
 ('450808538', 'Morello Cartel', 'N 49°12.16327, E 16°37.24875', NULL, NULL),
 ('6905317254', 'Salieri Cartel', 'N 49°13.59087, E 16°35.78202', NULL, NULL),
 ('8660138509', 'Reynosa Cartel', 'N 26°3.88785, W 98°17.80297', 4, 2),
-('9754034862', 'Monique Cartel', 'N 36°0.84342, E 14°19.46250', 4, 8),
-('9854032958', 'Dianne Cartel', 'N 48°34.63458, E 19°7.55460', 4, NULL),
+('9754034862', 'Monique Cartel', 'N 36°0.84342, E 14°19.46250', 4, 10),
+('9854032958', 'Dianne Cartel', 'N 48°34.63458, E 19°7.55460', 4, 11),
 ('admin', 'admin', 'admin', 0, 0);
 
 -- --------------------------------------------------------
@@ -168,7 +168,7 @@ CREATE TABLE `uloha` (
 INSERT INTO `uloha` (`specificke_meno`, `popis_cinnosti`, `vykonavatel`, `zadavatel_don`, `zadavatel_aliancia`, `gps_miesta`, `cas_zaciatku`, `cas_konca`, `uspesnost`, `komentar`) VALUES
 ('admin', 'admin', 'admin', 'admin', 0, 'admin', '2018-12-01 23:00:00', '2018-12-01 23:00:00', 'admin', 'admin'),
 ('bumbac zalezitost', 'ciel: Brabry Forbon', '9707028463', '9754034862', NULL, 'N 36°0.84342, E 14°19.46250', '2018-11-30 15:55:16', '2018-11-29 22:00:00', 'ano', 'sadfd'),
-('na fasirky', 'rozmlatit', '0051010014', '9754034862', NULL, 'N 40°46.37197, W 73°58.51303', NULL, NULL, '', ''),
+('na fasirky', 'rozmlatit', '0051010014', '9754034862', NULL, 'N 40°46.37197, W 73°58.51303', '2018-12-15 22:00:00', NULL, '', ''),
 ('ocista', 'podraz, potreba zbavit sa', '0051010014', '9854032958', NULL, 'N 26°3.88785, W 98°17.80297', '2018-11-30 15:50:11', '2018-11-29 23:59:00', 'ano', 'hihihi'),
 ('vyber vypalneho', 'Maly Denny meska s platbou', '9306284130', '8660138509', NULL, 'N 29°58.56720, W 90°7.16213', '1999-06-16 22:00:00', '1999-06-16 22:00:00', 'ano', 'dhdtjdjt'),
 ('zachranna sluzba', 'vazenie Bohunice, 2 ludia', '8854308782', '9854032958', NULL, 'N 49°10.46560, E 16°34.78125', '1985-05-16 22:00:00', '1985-05-16 22:00:00', 'ano', NULL),
@@ -219,8 +219,9 @@ CREATE TABLE `zraz_donov` (
 
 INSERT INTO `zraz_donov` (`id_zrazu`, `datum_cas`, `usporiadatel`, `gps_miesta`) VALUES
 (0, '2018-12-03 14:00:54', 'admin', 'admin'),
-(2, '2018-12-21 10:22:00', '8660138509', 'N 48°34.63458, E 19°7.55460'),
-(8, '2018-12-13 23:59:00', '9754034862', 'N 29°58.56720, W 90°7.16213');
+(2, '2018-12-13 22:59:00', '8660138509', 'N 36°0.84342, E 14°19.46250'),
+(10, '2018-11-30 22:00:00', '9754034862', 'N 36°0.84342, E 14°19.46250'),
+(11, '2018-12-15 22:00:00', '9854032958', 'N 36°0.84342, E 14°19.46250');
 
 --
 -- Kľúče pre exportované tabuľky
@@ -293,7 +294,7 @@ ALTER TABLE `aliancia`
 -- AUTO_INCREMENT pre tabuľku `zraz_donov`
 --
 ALTER TABLE `zraz_donov`
-  MODIFY `id_zrazu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_zrazu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Obmedzenie pre exportované tabuľky

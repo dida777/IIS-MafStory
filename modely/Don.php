@@ -98,6 +98,10 @@ class Don {
 		return Db::dotazVsechny("SELECT O.meno, O.priezvisko, O.rodne_cislo FROM Clen C JOIN Osoba O ON C.rodne_cislo = O.rodne_cislo WHERE C.familia = ? ", [$familia]);
 	}
 
+	public static function getZoznamVykonavatelovAdmin() {
+		return Db::dotazVsechny("SELECT O.meno, O.priezvisko, O.rodne_cislo, C.familia FROM Clen C JOIN Osoba O ON C.rodne_cislo = O.rodne_cislo");
+	}
+
 	public function getRodneCislo() {
 		return $this->rodne_cislo;
 	}

@@ -68,6 +68,10 @@ class Uloha {
 		}
 	}
 
+	public static function getAdminUlohy() {
+		return Db::dotazVsechny("SELECT * FROM Uloha");
+	}
+
 	public function getSpecifickeMeno() {
 		return $this->specificke_meno;
 	}

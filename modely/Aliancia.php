@@ -24,6 +24,10 @@ class Aliancia {
 		return 1;
 	}
 
+	public static function getAliance(){
+		return Db::dotazVsechny("SELECT id_aliancie, nazov_aliancie FROM Aliancia");
+	}
+	
 	public static function delAliance( $cislo_aliancie){
 		return Db::dotaz("DELETE FROM Aliancia WHERE id_aliancie = ?", [$cislo_aliancie]);
 	}
